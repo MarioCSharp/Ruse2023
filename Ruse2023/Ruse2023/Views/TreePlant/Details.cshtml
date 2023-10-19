@@ -1,0 +1,14 @@
+﻿@using Ruse2023.Models.TreePlant;
+@model TreePlantApprovalModel
+
+<form method="post">
+
+    <h2>@Model.Description</h2>
+    <img src="@Model.Image" />
+    <input type="number" asp-for="Credits"/>
+    <input type="hidden" asp-for="UserId"/>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+</form>

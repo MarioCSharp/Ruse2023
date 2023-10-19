@@ -45,6 +45,10 @@ namespace Ruse2023
                     options.RequireAuthenticatedUser();
                     options.RequireRole("Administrator");
                 });
+
+                policy.AddPolicy("AdministratorModeratorPolicy", options =>
+                    options.RequireAssertion(context =>
+                        context.User.IsInRole("Administrator") || context.User.IsInRole("Moderator")));
             });
 
                 builder.Services.AddApplicationServices(typeof(IAccountService));

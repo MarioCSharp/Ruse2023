@@ -11,5 +11,8 @@ namespace Ruse2023.Data
         {
         }
         public DbSet<ModeratorApplication> ModeratorApplications { get; set; }
+        public DbSet<Credits> Credits { get; set; }
+        public DbSet<TreePlantApplication> TreePlantApplications { get; set; }
+        public DbSet<ShoppingApplications> ShoppingApplications { get; set; }
     }
 }
