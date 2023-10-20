@@ -66,6 +66,8 @@ namespace Ruse2023.Controllers
         [HttpPost]
         public async Task<IActionResult> Decline(ApplicationDeclineModel model)
         {
+            if (!ModelState.IsValid) return View(model);
+
             await moderatorService.Decline(model);
 
             return RedirectToAction("Index", "Home");

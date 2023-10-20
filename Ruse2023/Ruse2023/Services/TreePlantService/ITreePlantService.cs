@@ -8,5 +8,6 @@ namespace Ruse2023.Services.TreePlantService
         Task<List<TreePlantApprovalModel>> GetAll();
         Task<TreePlantApprovalModel> GetDetails(int id);
         Task GiveCredits(TreePlantApprovalModel model);
+        Task Decline(int id);
     }
 }

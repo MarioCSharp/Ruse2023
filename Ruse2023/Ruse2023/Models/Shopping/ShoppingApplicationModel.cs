@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Ruse2023.Models.TreePlant
+namespace Ruse2023.Models.Shopping
 {
-    public class TreePlantApplicationModel
+    public class ShoppingApplicationModel
     {
         [Required]
         public string Description { get; set; } = null!;

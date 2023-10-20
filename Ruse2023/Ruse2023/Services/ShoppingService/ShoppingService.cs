@@ -1,20 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
+using Ruse2023.Models.Shopping;
 using Ruse2023.Models.TreePlant;
 
-namespace Ruse2023.Services.TreePlantService
+namespace Ruse2023.Services.ShoppingService
 {
-    public class TreePlantService : ITreePlantService
+    public class ShoppingService : IShoppingService
     {
         private readonly ApplicationDbContext context;
-        public TreePlantService(ApplicationDbContext context)
+        public ShoppingService(ApplicationDbContext context)
         {
             this.context = context;
         }
-        public async Task<bool> CreateApplication(TreePlantApplicationModel model, List<IFormFile> Image, string userId)
+        public async Task<bool> Create(ShoppingApplicationModel model, List<IFormFile> Image, string userId)
         {
-            var application = new TreePlantApplication()
+            var application = new ShoppingApplications()
             {
                 Description = model.Description,
                 UserId = userId,
@@ -34,24 +35,34 @@ namespace Ruse2023.Services.TreePlantService
                 }
             }
 
-            await context.TreePlantApplications.AddAsync(application);
+            await context.ShoppingApplications.AddAsync(application);
             await context.SaveChangesAsync();
 
-            return await context.TreePlantApplications.ContainsAsync(application);
+            return await context.ShoppingApplications.ContainsAsync(application);
         }
 
-        public async Task<List<TreePlantApprovalModel>> GetAll()
+        public async Task Decline(int id)
         {
-            var result = new List<TreePlantApprovalModel>();
+            var app = await context.ShoppingApplications.FindAsync(id);
 
-            var loop = context.TreePlantApplications.Where(x => x.Status == "Pending");
+            if (app == null) return;
+
+            app.Status = "Declined";
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<List<ShoppingApprovalModel>> GetAll()
+        {
+            var result = new List<ShoppingApprovalModel>();
+
+            var loop = context.ShoppingApplications.Where(x => x.Status == "Pending");
 
             foreach (var app in loop)
             {
                 var base64 = Convert.ToBase64String(app.Image);
                 var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
 
-                var model = new TreePlantApprovalModel()
+                var model = new ShoppingApprovalModel()
                 {
                     Id = app.Id,
                     Description = app.Description,
@@ -65,13 +76,13 @@ namespace Ruse2023.Services.TreePlantService
             return result;
         }
 
-        public async Task<TreePlantApprovalModel> GetDetails(int id)
+        public async Task<ShoppingApprovalModel> GetDetails(int id)
         {
-            var app = await context.TreePlantApplications.FindAsync(id);
+            var app = await context.ShoppingApplications.FindAsync(id);
 
             if (app == null) return null;
 
-            return new TreePlantApprovalModel
+            return new ShoppingApprovalModel
             {
                 Id = app.Id,
                 Description = app.Description,
@@ -80,10 +91,10 @@ namespace Ruse2023.Services.TreePlantService
             };
         }
 
-        public async Task GiveCredits(TreePlantApprovalModel model)
+        public async Task GiveCredits(ShoppingApprovalModel model)
         {
             var credits = await context.Credits.FirstOrDefaultAsync(x => x.UserId == model.UserId);
-            var tp = await context.TreePlantApplications.FindAsync(model.Id);
+            var tp = await context.ShoppingApplications.FindAsync(model.Id);
 
             if (tp == null) return;
 
@@ -105,16 +116,6 @@ namespace Ruse2023.Services.TreePlantService
             }
 
             credits.Ammount += model.Credits;
-            await context.SaveChangesAsync();
-        }
-
-        public async Task Decline(int id)
-        {
-            var app = await context.ShoppingApplications.FindAsync(id);
-
-            if (app == null) return;
-
-            app.Status = "Declined";
             await context.SaveChangesAsync();
         }
     }

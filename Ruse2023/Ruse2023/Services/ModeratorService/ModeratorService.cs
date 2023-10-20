@@ -23,6 +23,7 @@ namespace Ruse2023.Services.ModeratorService
                 Description = model.Description,
                 PhoneNumber = model.PhoneNumber,
                 UserId = userId,
+                Feedback = ""
             };
 
             await context.AddAsync(application);
@@ -65,7 +66,9 @@ namespace Ruse2023.Services.ModeratorService
         {
             var result = new List<ApplicationApprovalModel>();
 
-            foreach (var x in context.ModeratorApplications)
+            var loop = context.ModeratorApplications.Where(x => x.Approved == false && x.Feedback == "");
+
+            foreach (var x in loop)
             {
                 var user = await context.Users.FindAsync(x.UserId);
 
