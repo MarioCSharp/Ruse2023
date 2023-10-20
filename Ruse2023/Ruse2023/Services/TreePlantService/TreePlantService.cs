@@ -2,7 +2,6 @@
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
 using Ruse2023.Models.TreePlant;
-using System.Buffers.Text;
 
 namespace Ruse2023.Services.TreePlantService
 {
@@ -15,7 +14,13 @@ namespace Ruse2023.Services.TreePlantService
         }
         public async Task<bool> CreateApplication(TreePlantApplicationModel model, List<IFormFile> Image, string userId)
         {
-            var application = new TreePlantApplication() { Description = model.Description,  UserId = userId};
+            var application = new TreePlantApplication()
+            {
+                Description = model.Description,
+                UserId = userId,
+                Status =
+                "Pending"
+            };
 
             foreach (var file in Image)
             {
@@ -39,7 +44,9 @@ namespace Ruse2023.Services.TreePlantService
         {
             var result = new List<TreePlantApprovalModel>();
 
-            foreach (var app in context.TreePlantApplications)
+            var loop = context.TreePlantApplications.Where(x => x.Status == "Pending");
+
+            foreach (var app in loop)
             {
                 var base64 = Convert.ToBase64String(app.Image);
                 var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
@@ -76,6 +83,12 @@ namespace Ruse2023.Services.TreePlantService
         public async Task GiveCredits(TreePlantApprovalModel model)
         {
             var credits = await context.Credits.FirstOrDefaultAsync(x => x.UserId == model.UserId);
+            var tp = await context.TreePlantApplications.FindAsync(model.Id);
+
+            if (tp == null) return;
+
+            tp.Status = "Approved";
+            await context.SaveChangesAsync();
 
             if (credits == null)
             {

@@ -10,5 +10,6 @@ namespace Ruse2023.Data.Models
         public string Description { get; set; } = null!;
         public string UserId { get; set; } = null!;
         public byte[] Image { get; set; }
+        public string Status { get; set; } = null!;
     }
 }
