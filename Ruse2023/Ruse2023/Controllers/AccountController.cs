@@ -36,7 +36,9 @@ namespace Ruse2023.Controllers
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
                 UserName = registerModel.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                PhoneNumber = registerModel.PhoneNumber,
+                BirthDate = registerModel.BirthDate
             };
 
             var result = await userManager.CreateAsync(user, registerModel.Password);

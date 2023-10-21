@@ -9,5 +9,6 @@ namespace Ruse2023.Services.ShoppingService
         Task<ShoppingApprovalModel> GetDetails(int id);
         Task GiveCredits(ShoppingApprovalModel model);
         Task Decline(int id);
+        Task<List<ShoppingApprovalModel>> GetMyApplications(string userId);
     }
 }

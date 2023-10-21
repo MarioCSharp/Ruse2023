@@ -4,3 +4,4 @@
 <h1>@Model.FirstName @Model.LastName - @Model.PhoneNumber</h1>
 <p>@Model.Description</p>
 <a asp-action="Approve" asp-controller="Moderator" asp-route-id="@Model.Id"> Approve </a>
+<a asp-action="Decline" asp-controller="Moderator" asp-route-id="@Model.Id"> Decline </a>

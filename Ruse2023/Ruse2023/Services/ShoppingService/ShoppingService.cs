@@ -67,7 +67,8 @@ namespace Ruse2023.Services.ShoppingService
                     Id = app.Id,
                     Description = app.Description,
                     Image = imgSrc,
-                    UserId = app.UserId
+                    UserId = app.UserId,
+                    Status = app.Status,
                 };
 
                 result.Add(model);
@@ -87,8 +88,35 @@ namespace Ruse2023.Services.ShoppingService
                 Id = app.Id,
                 Description = app.Description,
                 Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(app.Image)),
-                UserId = app.UserId
+                UserId = app.UserId,
+                Status = app.Status
             };
+        }
+
+        public async Task<List<ShoppingApprovalModel>> GetMyApplications(string userId)
+        {
+            var result = new List<ShoppingApprovalModel>();
+
+            var loop = context.ShoppingApplications.Where(x => x.UserId == userId);
+
+            foreach (var app in loop)
+            {
+                var base64 = Convert.ToBase64String(app.Image);
+                var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                var model = new ShoppingApprovalModel()
+                {
+                    Id = app.Id,
+                    Description = app.Description,
+                    Image = imgSrc,
+                    UserId = app.UserId,
+                    Status = app.Status
+                };
+
+                result.Add(model);
+            }
+
+            return result;
         }
 
         public async Task GiveCredits(ShoppingApprovalModel model)

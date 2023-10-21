@@ -12,5 +12,9 @@ namespace Ruse2023.Data.Models
         [Required]
         [StringLength(Constants.User.LastNameMaxLength, MinimumLength = Constants.User.LastNameMinLength)]
         public string LastName { get; set; } = null!;
+        [Required]
+        public string PhoneNumber { get; set; } = null!;
+        [Required]
+        public DateTime BirthDate { get; set; }
     }
 }

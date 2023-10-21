@@ -9,5 +9,6 @@ namespace Ruse2023.Services.ModeratorService
         Task<ApplicationApprovalModel> GetDetails(int id);
         Task<bool> Approve(int id);
         Task Decline(ApplicationDeclineModel model);
+        Task<List<ApplicationApprovalModel>> GetMyApplications(string userId);
     }
 }

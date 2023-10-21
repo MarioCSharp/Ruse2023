@@ -50,7 +50,9 @@ namespace Ruse2023.Extensions
                         FirstName = "Mario",
                         LastName = "Petkov",
                         UserName = adminEmail,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        PhoneNumber = "+359977725272",
+                        BirthDate = DateTime.Now
                     };
 
                     await userManager.CreateAsync(user, adminPassword);

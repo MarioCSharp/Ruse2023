@@ -67,5 +67,15 @@ namespace Ruse2023.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public async Task<IActionResult> MyApplications()
+        {
+            return View(await shoppingService.GetMyApplications(accountService.GetUserId()));
+        }
+        [Authorize]
+        public async Task<IActionResult> ApplicationDetails(int id)
+        {
+            return View(await shoppingService.GetDetails(id));
+        }
     }
 }

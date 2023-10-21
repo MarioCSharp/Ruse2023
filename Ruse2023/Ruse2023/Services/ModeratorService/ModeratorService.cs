@@ -18,10 +18,14 @@ namespace Ruse2023.Services.ModeratorService
         }
         public async Task<bool> ApplyPost(string userId, ApplicationModel model)
         {
+            var user = await context.Users.FindAsync(userId);
+
+            if (user == null) return false;
+
             var application = new ModeratorApplication()
             {
                 Description = model.Description,
-                PhoneNumber = model.PhoneNumber,
+                PhoneNumber = user.PhoneNumber,
                 UserId = userId,
                 Feedback = ""
             };
@@ -111,6 +115,35 @@ namespace Ruse2023.Services.ModeratorService
                 Approved = application.Approved,
                 Feedback = application.Feedback
             };
+        }
+
+        public async Task<List<ApplicationApprovalModel>> GetMyApplications(string userId)
+        {
+            var result = new List<ApplicationApprovalModel>();
+
+            var user = await context.Users.FindAsync(userId);
+
+            if (user == null) return new List<ApplicationApprovalModel>();
+
+            var loop = context.ModeratorApplications.Where(x => x.UserId == userId);
+
+            foreach (var x in loop)
+            {
+                result.Add(new ApplicationApprovalModel()
+                {
+                    Id = x.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Description = x.Description,
+                    PhoneNumber = x.PhoneNumber,
+                    UserId = x.UserId,
+                    Approved = x.Approved,
+                    Feedback = x.Feedback
+                });
+            }
+
+            return result;
         }
     }
 }

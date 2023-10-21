@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ruse2023.Models.TreePlant;
 using Ruse2023.Services.AccountService;
-using Ruse2023.Services.ShoppingService;
 using Ruse2023.Services.TreePlantService;
 
 namespace Ruse2023.Controllers
@@ -64,6 +62,18 @@ namespace Ruse2023.Controllers
             await treePlantService.Decline(id);
 
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ApplicationDetails(int id)
+        {
+            return View(await treePlantService.GetDetails(id));
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MyApplications()
+        {
+            return View(await treePlantService.GetMyApplications(accountService.GetUserId()));
         }
     }
 }

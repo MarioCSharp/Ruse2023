@@ -117,5 +117,31 @@ namespace Ruse2023.Services.TreePlantService
             app.Status = "Declined";
             await context.SaveChangesAsync();
         }
+
+        public async Task<List<TreePlantApprovalModel>> GetMyApplications(string userId)
+        {
+            var result = new List<TreePlantApprovalModel>();
+
+            var loop = context.TreePlantApplications.Where(x => x.UserId == userId);
+
+            foreach (var app in loop)
+            {
+                var base64 = Convert.ToBase64String(app.Image);
+                var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                var model = new TreePlantApprovalModel()
+                {
+                    Id = app.Id,
+                    Description = app.Description,
+                    Image = imgSrc,
+                    UserId = app.UserId,
+                    Status = app.Status,
+                };
+
+                result.Add(model);
+            }
+
+            return result;
+        }
     }
 }

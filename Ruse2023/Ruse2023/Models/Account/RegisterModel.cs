@@ -18,6 +18,12 @@ namespace Ruse2023.Models.Account
         [EmailAddress]
         public string Email { get; set; } = null!;
         [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; } = null!;
+        [Required]
+        [Display(Name = "Birth Date")]
+        public DateTime BirthDate { get; set; }
+        [Required]
         [PasswordPropertyText]
         [Compare(nameof(PasswordRepeat))]
         [Display(Name = "Password")]
