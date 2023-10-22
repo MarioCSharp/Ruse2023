@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Ruse2023</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ruse2023.styles.css" asp-append-version="true" />
@@ -12,39 +11,33 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ruse2023</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" id="lo">
                         <li class="nav-item">
-                            <a asp-action="Create" asp-controller="TreePlant" class="nav-link">Apply for TreePlant</a>
+                            <a asp-action="Index" asp-controller="Home" class="nav-link">Начало</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="Create" asp-controller="Shopping" class="nav-link">Apply for Shopping</a>
+                            <a asp-action="Index" asp-controller="Store" class="nav-link">Магазин</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="Applications" asp-controller="TreePlant" class="nav-link">TreePlant Applications</a>
+                            <div class="dropdown">
+                                <a class="nav-link">Апликации</a>
+                                <div class="dropdown-content">
+                                    <a asp-action="Create" asp-controller="TreePlant" class="nav-link">Засаждане на дървета</a>
+                                    <a asp-action="Create" asp-controller="Shopping" class="nav-link">Екологично пазаруване</a>
+                                    <a asp-action="Apply" asp-controller="Moderator" class="nav-link">Молба за модератор</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="Applications" asp-controller="Shopping" class="nav-link">Shopping Applications</a>
+                            <a asp-action="AboutUs" asp-controller="Home" class="nav-link">За нас</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="Apply" asp-controller="Moderator" class="nav-link">Apply for Moderator</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="Applications" asp-controller="Administrator" class="nav-link">Moderator Applications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="MyApplications" asp-controller="Moderator" class="nav-link">My Moderator Applications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="MyApplications" asp-controller="Shopping" class="nav-link">My Shopping Applications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="MyApplications" asp-controller="TreePlant" class="nav-link">My TreePlant Applications</a>
+                            <a asp-action="Contacts" asp-controller="Home" class="nav-link">Контакти</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -69,3 +62,48 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<style>
+    #lo{
+        font-weight:900;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: black;
+    }
+
+    .dropbtn{
+        text-decoration: none;
+        color:black;
+    }
+
+    .dropdown {
+        text-decoration: none;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 260px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        text-decoration: none;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-decoration: none;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+                text-decoration: none;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>

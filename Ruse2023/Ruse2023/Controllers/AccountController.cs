@@ -99,5 +99,9 @@ namespace Ruse2023.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult Manage()
+        {
+            return View();
+        }
     }
 }

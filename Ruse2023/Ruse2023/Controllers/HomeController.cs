@@ -1,17 +1,27 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ruse2023.Models;
+using Ruse2023.Services.StoreService;
 using System.Diagnostics;
 
 namespace Ruse2023.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IStoreService storeService;
+        public HomeController(IStoreService storeService)
         {
+            this.storeService = storeService;
         }
-        [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            await storeService.Initialize();
+            return View();
+        }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult Contacts()
         {
             return View();
         }
