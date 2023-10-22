@@ -2,7 +2,6 @@
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
 using Ruse2023.Models.Shopping;
-using Ruse2023.Models.TreePlant;
 
 namespace Ruse2023.Services.ShoppingService
 {
