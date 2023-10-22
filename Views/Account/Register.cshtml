@@ -1,0 +1,114 @@
+﻿@using Ruse2023.Models.Account;
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Muhamad Nauval Azhar">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="description" content="This is a login page template based on Bootstrap 5">
+	<title>Bootstrap 5 Login Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+	<section class="h-50">
+		<div class="container h-50">
+			<div class="row justify-content-sm-center h-50">
+				<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+					<div class="text-center my-5">
+						<img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100" height="20">
+					</div>
+					<div class="card shadow-lg">
+						<div class="card-body p-5">
+							<h1 class="fs-4 card-title fw-bold mb-4">Регистрация</h1>
+							<form id="account" method="post">
+								<div class="form-group">
+                                    <label asp-for="FirstName"></label>
+    								<input asp-for="FirstName" class="form-control" />
+    								<span asp-validation-for="FirstName" class="text-danger"></span>
+								</div>
+
+                                <div class="form-group">
+    								<label asp-for="LastName"></label>
+    								<input asp-for="LastName" class="form-control" />
+    								<span asp-validation-for="LastName" class="text-danger"></span>
+								</div>
+
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="BirthDate"></label>
+                                    <input asp-for="BirthDate" class="form-control" />
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                </div>
+
+								<div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>  
+
+								<div class="form-group">
+    								<label asp-for="Password"></label>
+    								<input asp-for="Password" type="password" class="form-control" />
+    								<span asp-validation-for="Password" class="text-danger"></span>
+								</div>
+
+                                <div class="form-group">
+                                    <label asp-for="PasswordRepeat"></label>
+                                    <input asp-for="PasswordRepeat" type="password" class="form-control" />
+                                    <span asp-validation-for="PasswordRepeat" class="text-danger"></span>
+                                </div>
+
+								<p class="form-text text-muted mb-3">
+									При регистриране Вие се съгласявате с условията за ползване.
+								</p>
+
+								<div class="align-items-center d-flex">
+									<button type="submit" class="btn">Регистриране</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer py-3 border-0">
+							<div class="text-center">
+								Вече имаш акаунт? <a href="index.html" class="text-dark">Вписване</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/login.js"></script>
+</body>
+</html>
+
+<style>
+    .btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    }
+
+    .btn:hover {
+    background-color: green;
+    color: white;
+    }   
+
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

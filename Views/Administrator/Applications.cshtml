@@ -1,0 +1,17 @@
+﻿@using Ruse2023.Models.Moderator;
+@model IEnumerable<ApplicationApprovalModel>
+
+<div class="list-group">
+    @foreach (var application in Model)
+    {
+        <p class="list-group-item list-group-item-action">
+            @application.FirstName @application.LastName - @application.Email |
+            @if (User.IsInRole("Administrator"))
+            {
+                <a asp-action="Details" asp-controller="Moderator" asp-route-id="@application.Id"> Details </a>
+                <a asp-action="Approve" asp-controller="Moderator" asp-route-id="@application.Id"> Approve </a>
+                <a asp-action="Decline" asp-controller="Moderator" asp-route-id="@application.Id"> Decline </a>
+            }
+        </p>
+    }
+</div>
