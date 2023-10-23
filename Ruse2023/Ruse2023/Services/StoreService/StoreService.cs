@@ -13,6 +13,33 @@ namespace Ruse2023.Services.StoreService
             this.context = context;
         }
 
+        public async Task<bool> AddProduct(ProductModel model, List<IFormFile> Image)
+        {
+            var m = new Product()
+            {
+                Name = model.Name,
+                Price = model.Price,
+            };
+
+            foreach (var file in Image)
+            {
+                if (file.Length > 0)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(stream);
+                        m.Image = stream.ToArray();
+                    }
+                }
+            }
+
+
+            await context.Products.AddAsync(m);
+            await context.SaveChangesAsync();
+
+            return await context.Products.ContainsAsync(m);
+        }
+
         public async Task<List<ProductModel>> GetAllProducts()
         {
             return await context.Products

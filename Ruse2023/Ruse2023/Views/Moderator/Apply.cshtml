@@ -46,9 +46,9 @@
 						<form id="account" method="post">
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
+									<div class="form-group" id="asd">
 										<label asp-for="Description"></label>
-    									<input asp-for="Description" class="form-control" />
+										<input asp-for="Description" id="asdd" class="form-control" />
     									<span asp-validation-for="Description" class="text-danger"></span>
 									</div>
 								</div>
@@ -71,6 +71,16 @@
 	position: relative;
 	height: 100vh;
 }
+#asd{
+		height: 200px;
+		font-size: 14pt;
+	}
+
+	#asdd {
+		height: 100px;
+		width:300px;
+		font-size: 14pt;
+	}
 
 .section .section-center {
 	position: absolute;
@@ -83,7 +93,6 @@
 
 #booking {
 	font-family: 'Alice', serif;
-	background: red;
 }
 
 .booking-form {
