@@ -1,1 +1,36 @@
-﻿
+﻿@using Ruse2023.Models.Store;
+@model List<ProductModel>
+
+    <h1 id="youcredits"></h1>
+@foreach (var product in Model)
+{
+    <div id="forma" class="card" style="width: 18rem;">
+        <div class="card card-cascade narrower">
+
+            <div class="view view-cascade overlay">
+                <img id="image" class="card-img-top" src="@product.Image"
+                     alt="Card image cap">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <div class="card-body card-body-cascade">
+                <h4 class="font-weight-bold card-title">@product.Name</h4>
+                <p><b>@product.Price Точки</b></p>
+                <a id="butona" asp-controller="Store" asp-action="ProductById" asp-route-id="@product.Id" class="btn btn-success btn-lg px-5 py-3 mx-auto">Купи</a>
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $.get('/api/getCredits', (data) => {
+            $('#youcredits').text("Your credits: " + data.ammount);
+            console.log(data.Success);
+        });
+    </script>
+}

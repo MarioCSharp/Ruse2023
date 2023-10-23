@@ -10,18 +10,18 @@
             <div class="project-info-box mt-0">
                 <h5>ДЕТАЙЛИ</h5>
                 <p class="mb-0">@Model.Description</p>
-            </div><!-- / project-info-box -->
+            </div>
 
             <div class="project-info-box">
-                <p><b>Име:</b> Нз   </p>
-                <p><b>Дата на раждане:</b> 14.02.2020</p>
-                <p><b>Имейл:</b> James Doe</p>
-                <p><b>Телефонен номер:</b> Illustrator</p>
-            </div><!-- / project-info-box -->
+                <p><b>Име:</b> @Model.User.FirstName @Model.User.LastName</p>
+                <p><b>Дата на раждане:</b> @Model.User.BirthDate</p>
+                <p><b>Имейл:</b> @Model.User.Email</p>
+                <p><b>Телефонен номер:</b> @Model.User.PhoneNumber</p>
+            </div>
             <div class="project-info-box">
                 <p><b>Categories:</b> Design, Illustration</p>
                 <p><b>Skills:</b> Illustrator</p>
-            </div><!-- / project-info-box -->
+            </div>
 
             <div class="project-info-box">
                 <input type="number" asp-for="Credits"/>
@@ -29,13 +29,11 @@
                 <button type="submit" class="btn btn-primary">Apply</button>
                 <a asp-action="Decline" asp-controller="TreePlant" asp-route-id="@Model.Id" class="btn btn-warning">Decline</a>
             </div>
-
-
-        </div><!-- / column -->
+        </div>
 
         <div class="col-md-6">
             <img src="@Model.Image" />
-        </div><!-- / column -->
+        </div>
     </div>
 </div>
 </form>
@@ -44,7 +42,6 @@
     body{
     background:#f5f5f5;
     margin-top:20px;}
-/*------- portfolio -------*/
 .project {
   margin: 15px 0;
 }

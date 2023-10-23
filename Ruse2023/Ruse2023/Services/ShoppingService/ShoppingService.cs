@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
+using Ruse2023.Models.Account;
 using Ruse2023.Models.Shopping;
 
 namespace Ruse2023.Services.ShoppingService
@@ -82,13 +83,23 @@ namespace Ruse2023.Services.ShoppingService
 
             if (app == null) return null;
 
+            var user = await context.Users.FindAsync(app.UserId);
+
             return new ShoppingApprovalModel
             {
                 Id = app.Id,
                 Description = app.Description,
                 Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(app.Image)),
                 UserId = app.UserId,
-                Status = app.Status
+                Status = app.Status,
+                User = new UserDisplayModel()
+                {
+                    BirthDate = user.BirthDate,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email
+                }
             };
         }
 

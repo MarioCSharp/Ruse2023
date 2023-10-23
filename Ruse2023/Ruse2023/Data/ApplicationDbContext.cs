@@ -15,5 +15,6 @@ namespace Ruse2023.Data
         public DbSet<TreePlantApplication> TreePlantApplications { get; set; }
         public DbSet<ShoppingApplications> ShoppingApplications { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<BoughtProduct> BoughtProducts { get; set; }
     }
 }

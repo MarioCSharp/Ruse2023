@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
+using Ruse2023.Models.Account;
 using Ruse2023.Models.TreePlant;
 
 namespace Ruse2023.Services.TreePlantService
@@ -71,12 +72,22 @@ namespace Ruse2023.Services.TreePlantService
 
             if (app == null) return null;
 
+            var user = await context.Users.FindAsync(app.UserId);
+
             return new TreePlantApprovalModel
             {
                 Id = app.Id,
                 Description = app.Description,
                 Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(app.Image)),
-                UserId = app.UserId
+                UserId = app.UserId,
+                User = new UserDisplayModel()
+                {
+                    BirthDate = user.BirthDate,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email
+                }
             };
         }
 

@@ -10,6 +10,6 @@ namespace Ruse2023.Models.Store
         [Required]
         public int Price { get; set; }
         [Required]
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     }
 }

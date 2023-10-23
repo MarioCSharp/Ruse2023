@@ -1,0 +1,6 @@
+﻿@using Ruse2023.Models.Store;
+@model ProductModel
+
+<form method="post">
+    <a asp-controller="Store" asp-action="BuyProduct" asp-route-id="@Model.Id">Buy</a>
+</form>

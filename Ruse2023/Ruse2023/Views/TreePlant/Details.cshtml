@@ -12,12 +12,12 @@
                 <p class="mb-0">@Model.Description</p>
             </div><!-- / project-info-box -->
 
-            <div class="project-info-box">
-                <p><b>Име:</b> Нз   </p>
-                <p><b>Дата на раждане:</b> 14.02.2020</p>
-                <p><b>Имейл:</b> James Doe</p>
-                <p><b>Телефонен номер:</b> Illustrator</p>
-            </div><!-- / project-info-box -->
+                <div class="project-info-box">
+                    <p><b>Име:</b> @Model.User.FirstName @Model.User.LastName</p>
+                    <p><b>Дата на раждане:</b> @Model.User.BirthDate</p>
+                    <p><b>Имейл:</b> @Model.User.Email</p>
+                    <p><b>Телефонен номер:</b> @Model.User.PhoneNumber</p>
+                </div>
             <div class="project-info-box">
                 <p><b>Categories:</b> Design, Illustration</p>
                 <p><b>Skills:</b> Illustrator</p>

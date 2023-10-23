@@ -1,4 +1,6 @@
-﻿namespace Ruse2023.Models.Shopping
+﻿using Ruse2023.Models.Account;
+
+namespace Ruse2023.Models.Shopping
 {
     public class ShoppingApprovalModel
     {
@@ -7,6 +9,7 @@
         public string Image { get; set; }
         public int Credits { get; set; }
         public string Status { get; set; }
+        public UserDisplayModel User { get; set; }
         public string UserId { get; set; }
     }
 }
