@@ -1,11 +1,9 @@
-﻿@using Ruse2023.Models.Store;
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model List<StoreApiModel>
+@model HomePageModel
 
 <div class="text-center">
-    <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -16,8 +14,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <main class="flex-shrink-0">
+    <main class="flex-shrink-0" >
+        <section class="header">
         <header class="py-5">
             <div class="container px-5 pb-5">
                 <div class="row gx-5 align-items-center">
@@ -42,6 +40,7 @@
                 </div>
             </div>
         </header>
+        </section>
         <section class="bg-light py-5">
             <div class="container px-5">
                 <div class="row gx-5 justify-content-center">
@@ -75,7 +74,7 @@
     <h1 class="display-4">Най-продавани продукти</h1>
     <br/>
     <div class="products">
-        @foreach (var product in Model)
+        @foreach (var product in Model.Products)
         {
             <div id="forma" class="card" style="width: 18rem;">
                 <div class="card card-cascade narrower">
@@ -97,6 +96,34 @@
 
                 </div>
             </div>
+
+        }
+    </div>
+    <h1 class="display-4">Топ клиенти</h1>
+    <br/>
+    <div class="klient">
+        @foreach (var user in Model.Users)
+        {
+            <div id="forma" class="card" style="width: 18rem;">
+                <div class="card card-cascade narrower">
+
+                    <div class="view view-cascade overlay">
+                        <img id="snimkanaklient" class="card-img-top" src="https://o.remove.bg/downloads/a046022a-d5b3-4731-92b8-322a7238a659/pngtree-outline-user-icon-png-image_5045523-removebg-preview.png"
+                         alt="Card image cap">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <div class="card-body card-body-cascade">
+                        <h4 class="font-weight-bold card-title">@user.FirstName @user.LastName</h4>
+                        <p><b>@user.Credits Точки събрани</b></p>
+
+                    </div>
+
+                </div>
+            </div>
+
         }
     </div>
 </div>
@@ -137,4 +164,30 @@
         padding: 20px; 
     }
 
+    /* klient*/
+    .klient {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 92%;
+    }
+
+    #snimkanaklient {
+        width: 50px;
+        height: 50px;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    .header{
+        height: 150%;
+        width: 107%;
+        background-image: url(https://wallpapercave.com/wp/wp9161931.jpg);
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
 </style>

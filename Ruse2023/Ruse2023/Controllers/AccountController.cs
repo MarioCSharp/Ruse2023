@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Ruse2023.Data;
 using Ruse2023.Data.Models;
 using Ruse2023.Models.Account;
 
@@ -9,10 +10,14 @@ namespace Ruse2023.Controllers
     {
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly ApplicationDbContext context;
+        public AccountController(UserManager<User> userManager,
+                                 SignInManager<User> signInManager,
+                                 ApplicationDbContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.context = context;
         }
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -46,6 +51,12 @@ namespace Ruse2023.Controllers
             if (result.Succeeded)
             {
                 await signInManager.SignInAsync(user, isPersistent: false);
+                await context.Credits.AddAsync(new Credits()
+                {
+                    UserId = user.Id,
+                    Ammount = 0
+                });
+                await context.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Home");
             }

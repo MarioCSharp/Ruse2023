@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ruse2023.Models;
+using Ruse2023.Services.AccountService;
 using Ruse2023.Services.ApiService;
 using Ruse2023.Services.StoreService;
 using System.Diagnostics;
@@ -10,16 +11,22 @@ namespace Ruse2023.Controllers
     {
         private readonly IStoreService storeService;
         private readonly IApiService apiService;
+        private readonly IAccountService accountService;
         public HomeController(IStoreService storeService,
-                              IApiService apiService)
+                              IApiService apiService,
+                              IAccountService accountService)
         {
             this.storeService = storeService;
             this.apiService = apiService;
+            this.accountService = accountService;
         }
         public async Task<IActionResult> Index()
         {
-            await storeService.Initialize();
-            return View(await apiService.GetTopProducts());
+            return View(new HomePageModel
+            {
+                Products = await apiService.GetTopProducts(),
+                Users = await accountService.GetUsers()
+            });
         }
         public IActionResult AboutUs()
         {
