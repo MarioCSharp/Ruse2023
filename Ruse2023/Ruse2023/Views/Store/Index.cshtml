@@ -1,34 +1,34 @@
 ﻿@using Ruse2023.Models.Store;
 @model List<ProductModel>
 
-    <h1 id="youcredits"></h1>
+<h1 id="youcredits"></h1>
 
 <div style="display: inline-block; font-size: 0; width: 100%;">
-@foreach (var product in Model)
-{
-        <div style="display: inline-block; margin: 0; padding: 0;">
-    <div id="forma" class="card" style="width: 18rem; margin-left: 15px;">
-        <div class="card card-cascade narrower">
+    @foreach (var product in Model)
+    {
+        <div style="display: inline-block; margin: 50px; padding: 0;">
+            <div id="forma" class="card" style="width: 18rem; margin-left: 15px;">
+                <div class="card card-cascade narrower">
 
-            <div class="view view-cascade overlay">
-                <img id="image" class="card-img-top" src="@product.Image"
-                 alt="Card image cap">
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
+                    <div class="view view-cascade overlay">
+                        <img id="image" class="card-img-top" src="@product.Image"
+                         alt="Card image cap">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <div class="card-body card-body-cascade">
+                        <h4 class="font-weight-bold card-title">@product.Name</h4>
+                        <p><b>@product.Price Точки</b></p>
+                        <a id="butona" asp-controller="Store" asp-action="ProductById" asp-route-id="@product.Id" class="btn btn-success btn-lg px-5 py-3 mx-auto">Купи</a>
+
+                    </div>
+
+                </div>
             </div>
-
-            <div class="card-body card-body-cascade">
-                <h4 class="font-weight-bold card-title">@product.Name</h4>
-                <p><b>@product.Price Точки</b></p>
-                <a id="butona" asp-controller="Store" asp-action="ProductById" asp-route-id="@product.Id" class="btn btn-success btn-lg px-5 py-3 mx-auto">Купи</a>
-
-            </div>
-
         </div>
-    </div>
-    </div>
-}
+    }
 </div>
 
 
@@ -90,5 +90,4 @@
         width: 50px;
         height: 50px;
     }
-
 </style>
