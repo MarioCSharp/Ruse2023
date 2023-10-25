@@ -2,14 +2,17 @@
 @model List<ProductModel>
 
     <h1 id="youcredits"></h1>
+
+<div style="display: inline-block; font-size: 0; width: 100%;">
 @foreach (var product in Model)
 {
-    <div id="forma" class="card" style="width: 18rem;">
+        <div style="display: inline-block; margin: 0; padding: 0;">
+    <div id="forma" class="card" style="width: 18rem; margin-left: 15px;">
         <div class="card card-cascade narrower">
 
             <div class="view view-cascade overlay">
                 <img id="image" class="card-img-top" src="@product.Image"
-                     alt="Card image cap">
+                 alt="Card image cap">
                 <a>
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -24,7 +27,11 @@
 
         </div>
     </div>
+    </div>
 }
+</div>
+
+
 
 @section Scripts{
     <script>
@@ -34,3 +41,54 @@
         });
     </script>
 }
+
+<style>
+    #id {
+        text-align: center;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 92%;
+    }
+
+    #image {
+        width: 287px;
+        height: 250px;
+    }
+
+    #butona {
+        width: 60%;
+        height: 40px;
+        font-size: 20px;
+        display: flex; /* this enables the flexbox model */
+        align-items: center; /* this vertically aligns the text in the middle */
+        justify-content: center;
+    }
+
+    #form {
+        border: 2px solid;
+        border-radius: 25px;
+        padding: 20px;
+    }
+
+    /* klient*/
+    .klient {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 92%;
+    }
+
+    #snimkanaklient {
+        width: 50px;
+        height: 50px;
+    }
+
+</style>

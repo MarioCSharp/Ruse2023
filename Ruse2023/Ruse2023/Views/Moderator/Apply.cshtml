@@ -47,14 +47,14 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group" id="asd">
-										<label asp-for="Description"></label>
-										<input asp-for="Description" id="asdd" class="form-control" />
+										<h2 style="text-align:right;margin:0 auto; padding-left:12px; margin-right:-25px;" asp-for="Description">Описание</h2>
+										<textarea asp-for="Description" id="asdd" class="form-control"></textarea>
+										<button style="position: absolute; left: 60%; margin-top: 20px; -ms-transform: translate(-25%, -25%); transform: translate(-25%, -25%);" type="submit" class="submit-btn">Качване</button>
     									<span asp-validation-for="Description" class="text-danger"></span>
 									</div>
 								</div>
 							</div>
 							<div class="form-btn">
-								<button type="submit" class="submit-btn">Submit</button>
 							</div>
 						</form>
 					</div>
@@ -67,6 +67,7 @@
 </html>
 
 <style>
+
     .section {
 	position: relative;
 	height: 100vh;
