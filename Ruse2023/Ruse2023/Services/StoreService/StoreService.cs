@@ -2,6 +2,7 @@
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
 using Ruse2023.Models.Store;
+using Ruse2023.Services.AccountService;
 using System.Buffers.Text;
 
 namespace Ruse2023.Services.StoreService
@@ -9,9 +10,12 @@ namespace Ruse2023.Services.StoreService
     public class StoreService : IStoreService
     {
         private readonly ApplicationDbContext context;
-        public StoreService(ApplicationDbContext context)
+        private readonly IAccountService accountService;
+        public StoreService(ApplicationDbContext context,
+                            IAccountService accountService)
         {
             this.context = context;
+            this.accountService = accountService;
         }
 
         public async Task<bool> AddProduct(ProductModel model, List<IFormFile> Image)
@@ -48,7 +52,7 @@ namespace Ruse2023.Services.StoreService
             if (product == null) return false;
 
             var credits = await context.Credits.FirstOrDefaultAsync(x => x.UserId == userId);
-            
+
             if (credits == null) return false;
 
             if (credits.Ammount < product.Price) return false;
@@ -85,18 +89,23 @@ namespace Ruse2023.Services.StoreService
             await Console.Out.WriteLineAsync();
         }
 
-        public async Task<ProductModel> ProductById(int id)
+        public async Task<ProductCheckOutModel> ProductById(int id)
         {
             var m = await context.Products.FindAsync(id);
 
             if (m == null) return null;
 
-            return new ProductModel()
+            var user = await context.Users.FindAsync(accountService.GetUserId());
+
+            return new ProductCheckOutModel()
             {
                 Id = id,
                 Name = m.Name,
                 Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(m.Image)),
-                Price = m.Price
+                Price = m.Price,
+                FullName = user.FirstName + " " + user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
             };
         }
     }

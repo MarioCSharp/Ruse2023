@@ -7,7 +7,7 @@ namespace Ruse2023.Services.StoreService
         Task<List<ProductModel>> GetAllProducts();
         Task Initialize();
         Task<bool> AddProduct(ProductModel model, List<IFormFile> Image);
-        Task<ProductModel> ProductById(int id);
+        Task<ProductCheckOutModel> ProductById(int id);
         Task<bool> BuyProduct(int id, string userId);
     }
 }
