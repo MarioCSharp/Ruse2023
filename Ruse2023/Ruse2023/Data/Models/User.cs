@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ruse2023.Data.Models

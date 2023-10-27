@@ -10,13 +10,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="css/treeplant.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 <body class="landing is-preload">
-@*
-    <div id="logo" style="width: 50px; height:50px;">
-        <img src="~/images/Screenshot_20231027_101853_Chrome-removebg.png" />
-    </div>*@
+
+    <div id="logo">
+        <img src="~/images/Screenshot_20231027_101853_Chrome-removebg.png" style="width: 70px; height:70px;" />
+    </div>
+
     <!-- Page Wrapper -->
     <div id="page-wrapper">
 
@@ -85,19 +87,14 @@
         <!-- Two -->
         <section id="two" class="wrapper alt style2">
             <section class="spotlight">
-                <div class="image"><img src="images/pic01.jpg" alt="" /></div><div class="content">
-                    <h2>
-                        <br />
-                        
-                    </h2>
-                    <p></p>
-                </div>
+                
+
             </section>
             <section class="spotlight">
                 <div class="image"><img src="images/pic02.jpg" alt="" /></div><div class="content">
                     <h2>
                         <br />
-                        
+
                     </h2>
                     <p></p>
                 </div>
@@ -105,10 +102,10 @@
             <section class="spotlight">
                 <div class="image"><img src="images/pic03.jpg" alt="" /></div><div class="content">
                     <h2>
+                        <a asp-action="Create" asp-controller="TreePlant" class="button fit primary">Засади дърво</a>
                         <br />
-                       
                     </h2>
-                    <p></p>
+                   
                 </div>
             </section>
         </section>
@@ -116,21 +113,26 @@
         <!-- Three -->
         <section id="three" class="wrapper style3 special">
             <div class="inner">
+
                 <header class="major">
                     <h2></h2>
                     <p>
                         <br />
-                        
+
                     </p>
                 </header>
                 <ul class="features">
                     <li class="icon fa-paper-plane">
                         <h3></h3>
-                        <p></p>
+                        <p>
+
+                        </p>
                     </li>
                     <li class="icon solid fa-laptop">
                         <h3></h3>
-                        <p></p>
+                        <p>
+
+                        </p>
                     </li>
                     <li class="icon solid fa-code">
                         <h3></h3>
@@ -160,8 +162,8 @@
                     <p></p>
                 </header>
                 <ul class="actions stacked">
-                    <li><a href="#" class="button fit primary">Activate</a></li>
-                    <li><a href="#" class="button fit">Learn More</a></li>
+                    <li><a asp-action="Index" asp-controller="Store" class="button fit primary">Магазин</a></li>
+                    <li><a href="#" class="button fit">Засади дърво</a></li>
                 </ul>
             </div>
         </section>
@@ -169,15 +171,8 @@
         <!-- Footer -->
         <footer id="footer">
             <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
             </ul>
-            
-                
-            
+            s
         </footer>
 
     </div>
@@ -211,8 +206,8 @@
     }
 
     #image {
-        width: 287px;
-        height: 250px;
+        width: 50px;
+        height: 90px;
     }
 
     #butona {
@@ -238,12 +233,11 @@
         width: 92%;
     }
 
-    #logo{
-        position:absolute;
-        top:0;
+    #logo {
+        position: absolute;
+        top: 0;
         left: 0;
         width: 50px;
-
     }
 
     #snimkanaklient {
@@ -255,4 +249,5 @@
         margin: 0;
         padding: 0;
     }
+
 </style>
