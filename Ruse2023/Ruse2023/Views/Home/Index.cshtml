@@ -1,139 +1,198 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "";
 }
 @model HomePageModel
 
-<div class="text-center">
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
-    <main class="flex-shrink-0" >
-        <section class="header">
-        <header class="py-5">
-            <div class="container px-5 pb-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-xxl-5">
-                        <div class="text-center text-xxl-start">
-                            <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Екологичния начин на живот!</span></h1>
-                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
+<html>
+<head>
+    <title>EcoWay</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="landing is-preload">
+@*
+    <div id="logo" style="width: 50px; height:50px;">
+        <img src="~/images/Screenshot_20231027_101853_Chrome-removebg.png" />
+    </div>*@
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1><a href="index.html">EcoWay</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                        <div id="menu">
+                            <ul>
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
-                                    <a class="btn btn-success btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" asp-controller="Account" asp-action="Login">Започни</a>
+                                    <li><a asp-action="Register" asp-controller="Account">Sign Up</a></li>
+                                    <li><a asp-action="Login" asp-controller="Account">Log In</a></li>
                                 }
-                                <a class="btn btn-success btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="#aboutme">За нас</a>
-                            </div>
+                                else
+                                {
+                                    <li><a asp-action="Profile" asp-controller="Account">Account</a></li>
+                                }
+                            </ul>
                         </div>
-                    </div>
-                    <div class="col-xxl-7">
-                        <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                            <div class="profile bg-gradient-primary-to-secondary">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </li>
+                </ul>
+            </nav>
         </header>
+
+        <!-- Banner -->
+        <section id="banner">
+            <div class="inner">
+                <h2>EcoWay</h2>
+                <p>
+                    Започни<br />
+                    промяната<br />
+                    с EcoWay
+                </p>
+            </div>
+            <a href="#two" class="more scrolly">Научи повече</a>
         </section>
-        
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
 
-
-
-    <br />
-    <br />
-    <h1 class="display-4">Най-продавани продукти</h1>
-    <br/>
-    <div class="products">
-        @foreach (var product in Model.Products)
-        {
-            <div id="forma" class="card" style="width: 18rem;">
-                <div class="card card-cascade narrower">
-
-                    <div class="view view-cascade overlay">
-                        <img id="image" class="card-img-top" src="@product.Image"
-                             alt="Card image cap">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <div class="card-body card-body-cascade">
-                        <h4 class="font-weight-bold card-title">@product.Name</h4>
-                        <p><b>@product.Price Точки</b></p>
-                        <a id="butona" asp-controller="Store" asp-action="ProductById" asp-route-id="@product.Id" class="btn btn-success btn-lg px-5 py-3 mx-auto">Купи</a>
-
-                    </div>
-
-                </div>
-            </div>
-
-        }
-    </div>
-    <br />
-    <br />
-    <h1 class="display-4">Топ клиенти</h1>
-    <br/>
-    <div class="klient">
-        @foreach (var user in Model.Users)
-        {
-            <div id="forma" class="card" style="width: 18rem;">
-                <div class="card card-cascade narrower">
-
-                    <div class="view view-cascade overlay">
-                        <img id="snimkanaklient" class="card-img-top" src="https://o.remove.bg/downloads/a046022a-d5b3-4731-92b8-322a7238a659/pngtree-outline-user-icon-png-image_5045523-removebg-preview.png"
-                         alt="Card image cap">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <div class="card-body card-body-cascade">
-                        <h4 class="font-weight-bold card-title">@user.FirstName @user.LastName</h4>
-                        <p><b>@user.Credits Точки събрани</b></p>
-
-                    </div>
-
-                </div>
-            </div>
-
-        }
-    </div>
-    <br />
-    <br />
-    <section class="bg-light py-5">
-        <div class="container px-5">
-            <div class="row gx-5 justify-content-center">
-                <div class="col-xxl-8">
-                    <div class="text-center my-5">
-                        <h2 id="aboutme" class="display-5 fw-bolder"><span class="text-gradient d-inline">За  нас</span></h2>
+        <!-- One -->
+        <section id="one" class="wrapper style1 special">
+            <div class="inner">
+                <header class="major">
+                    <h2>
+                        Рециклирането по нов иновативен начин!<br>
+                        Ние сме EcoWay!<br />
+                        Тук сме за да помогнем на хората да започнат по-екологичен начин на живот.
+                    </h2>
+                    <p>
                         <br />
-                        <p class="text-muted">
-                            Ние сме тук, за да създадем общност от ентусиасти, които са насочени към постигането
-                            на по-зелен начин на живот. Нашата цел е да вдъхновим и образоваме хората за екологичните
-                            проблеми и да им помогнем да направят информирани решения, които ще допринесат за по-чиста
-                            и по-здравословна планета.Точно тук, в нашия екологичен магазин, ние вярваме, че природата
-                            заслужава нашето уважение и защита. Нашата мисия е да предложим на нашите клиенти възможност
-                            да избират от широка гама от екологично устойчиви продукти, които не само отговарят на техните
-                            нужди, но и спомагат за опазването на околната среда.
-                        </p>
-                        <div class="d-flex justify-content-center fs-2 gap-4">
-                            <a class="text-success" href="https://github.com/MarioCSharp/"><i class="bi bi-github"></i></a>
-                        </div>
-                    </div>
-                </div>
+
+                    </p>
+                </header>
+                <ul class="icons major">
+                    <li><span class="icon fa-map major style1"><span class="label">Lorem</span></span></li>
+                    <li><span class="icon fa-heart major style2"><span class="label">Ipsum</span></span></li>
+                    <li><span class="icon solid fa-code major style3"><span class="label">Dolor</span></span></li>
+                </ul>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+
+        <!-- Two -->
+        <section id="two" class="wrapper alt style2">
+            <section class="spotlight">
+                <div class="image"><img src="images/pic01.jpg" alt="" /></div><div class="content">
+                    <h2>
+                        <br />
+                        
+                    </h2>
+                    <p></p>
+                </div>
+            </section>
+            <section class="spotlight">
+                <div class="image"><img src="images/pic02.jpg" alt="" /></div><div class="content">
+                    <h2>
+                        <br />
+                        
+                    </h2>
+                    <p></p>
+                </div>
+            </section>
+            <section class="spotlight">
+                <div class="image"><img src="images/pic03.jpg" alt="" /></div><div class="content">
+                    <h2>
+                        <br />
+                       
+                    </h2>
+                    <p></p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Three -->
+        <section id="three" class="wrapper style3 special">
+            <div class="inner">
+                <header class="major">
+                    <h2></h2>
+                    <p>
+                        <br />
+                        
+                    </p>
+                </header>
+                <ul class="features">
+                    <li class="icon fa-paper-plane">
+                        <h3></h3>
+                        <p></p>
+                    </li>
+                    <li class="icon solid fa-laptop">
+                        <h3></h3>
+                        <p></p>
+                    </li>
+                    <li class="icon solid fa-code">
+                        <h3></h3>
+                        <p></p>
+                    </li>
+                    <li class="icon solid fa-headphones-alt">
+                        <h3></h3>
+                        <p></p>
+                    </li>
+                    <li class="icon fa-heart">
+                        <h3></h3>
+                        <p></p>
+                    </li>
+                    <li class="icon fa-flag">
+                        <h3></h3>
+                        <p> </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="cta" class="wrapper style4">
+            <div class="inner">
+                <header>
+                    <h2></h2>
+                    <p></p>
+                </header>
+                <ul class="actions stacked">
+                    <li><a href="#" class="button fit primary">Activate</a></li>
+                    <li><a href="#" class="button fit">Learn More</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            
+                
+            
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
 
 <style>
     #id {
@@ -168,7 +227,7 @@
     #form {
         border: 2px solid;
         border-radius: 25px;
-        padding: 20px; 
+        padding: 20px;
     }
 
     /* klient*/
@@ -179,12 +238,20 @@
         width: 92%;
     }
 
+    #logo{
+        position:absolute;
+        top:0;
+        left: 0;
+        width: 50px;
+
+    }
+
     #snimkanaklient {
         width: 50px;
         height: 50px;
     }
 
-    *{
+    * {
         margin: 0;
         padding: 0;
     }

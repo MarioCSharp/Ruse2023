@@ -1,7 +1,8 @@
 ﻿@using Ruse2023.Models.Account;
 @model LoginModel
 @{
-    ViewData["Title"] = "Log in";
+	ViewData["Title"] = "Log in";
+	Layout = "";
 }
 
 <!DOCTYPE html>
@@ -41,7 +42,8 @@
                                 </div>
 
 								<div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Вписване</button>
+									<br/>
+									<button type="submit" class="btn btn-success btn-sm px-3 py-2 me-sm-2 fs-6 fw-bolder">Вписване</button>
                                 </div>
 							</form>
 						</div>
@@ -63,6 +65,11 @@
 </body>
 </html>
 
+<style>
+	.btn {
+		margin-left: 95px;
+	}
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

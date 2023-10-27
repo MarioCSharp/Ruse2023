@@ -1,93 +1,107 @@
 ﻿@using Ruse2023.Models.Store;
 @model List<ProductModel>
 
-<h1 id="youcredits"></h1>
-
-<div style="display: inline-block; font-size: 0; width: 100%;">
-    @foreach (var product in Model)
-    {
-        <div style="display: inline-block; margin: 50px; padding: 0;">
-            <div id="forma" class="card" style="width: 18rem; margin-left: 15px;">
-                <div class="card card-cascade narrower">
-
-                    <div class="view view-cascade overlay">
-                        <img id="image" class="card-img-top" src="@product.Image"
-                         alt="Card image cap">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <div class="card-body card-body-cascade">
-                        <h4 class="font-weight-bold card-title">@product.Name</h4>
-                        <p><b>@product.Price Точки</b></p>
-                        <a id="butona" asp-controller="Store" asp-action="ProductById" asp-route-id="@product.Id" class="btn btn-success btn-lg px-5 py-3 mx-auto">Купи</a>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    }
-</div>
-
-
-
-@section Scripts{
-    <script>
-        $.get('/api/getCredits', (data) => {
-            $('#youcredits').text("Your credits: " + data.ammount);
-            console.log(data.Success);
-        });
-    </script>
+@{
+    Layout = "";
 }
 
-<style>
-    #id {
-        text-align: center;
-    }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body>
+    <!-- Navigation-->
+    <header id="header" class="alt">
+        <h1><a href="index.html">EcoWay</a></h1>
+        <nav id="nav">
+            <ul>
+                <li class="special">
+                    <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                    <div id="menu">
+                        <ul>
+                            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                            <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-action="Register" asp-controller="Account">Sign Up</a></li>
+                                <li><a asp-action="Login" asp-controller="Account">Log In</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-action="Profile" asp-controller="Account">Account</a></li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Магазин</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Добре дошли!</p>
+            </div>
+        </div>
+    </header>
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @foreach (var product in Model)
+                {
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="@product.Image" alt="..." />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder" style="color: black;">@product.Name</h5>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <div style="color: black;">@product.Price C</div>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white"></p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
 
-    html {
-        scroll-behavior: smooth;
-    }
-
-    .products {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        width: 92%;
-    }
-
-    #image {
-        width: 287px;
-        height: 250px;
-    }
-
-    #butona {
-        width: 60%;
-        height: 40px;
-        font-size: 20px;
-        display: flex; /* this enables the flexbox model */
-        align-items: center; /* this vertically aligns the text in the middle */
-        justify-content: center;
-    }
-
-    #form {
-        border: 2px solid;
-        border-radius: 25px;
-        padding: 20px;
-    }
-
-    /* klient*/
-    .klient {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        width: 92%;
-    }
-
-    #snimkanaklient {
-        width: 50px;
-        height: 50px;
-    }
-</style>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>

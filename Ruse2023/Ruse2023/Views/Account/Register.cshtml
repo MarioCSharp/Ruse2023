@@ -1,7 +1,8 @@
 ﻿@using Ruse2023.Models.Account;
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+	ViewData["Title"] = "Register";
+	Layout = "";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +74,8 @@
 								</p>
 
 								<div class="align-items-center d-flex">
-									<button type="submit" class="btn">Регистриране</button>
+                                    <br />
+                                    <button type="submit" class="btn btn-success btn-sm px-3 py-2 me-sm-2 fs-6 fw-bolder">Регистриране</button>
 								</div>
 							</form>
 						</div>
@@ -94,18 +96,12 @@
 
 <style>
     .btn {
-    background-color: blue;
-    color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     transition: background-color 0.5s;
+        margin-left: 87px;
     }
-
-    .btn:hover {
-    background-color: green;
-    color: white;
-    }   
 
 </style>
 
