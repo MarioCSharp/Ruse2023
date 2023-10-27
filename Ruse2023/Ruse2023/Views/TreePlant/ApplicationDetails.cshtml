@@ -16,45 +16,77 @@
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<script src="~/assets/js/jquery.min.js"></script>
-<script src="~/assets/js/jquery.scrollex.min.js"></script>
-<script src="~/assets/js/jquery.scrolly.min.js"></script>
-<script src="~/assets/js/browser.min.js"></script>
-<script src="~/assets/js/breakpoints.min.js"></script>
-<script src="~/assets/js/util.js"></script>
-<script src="~/assets/js/main.js"></script>
+<body style="background-color:#495057">
+    <br />
+    <br />
+    <h1><b style="position: absolute; left: 40%; font-size: 40px;">Детайли за дърво</b></h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <form method="post">
+        <header id="header" class="alt">
+            <h1><a href="index.html">EcoWay</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                        <div id="menu">
+                            <ul>
+                                <li><a asp-action="Index" asp-controller="Home">Начало</a></li>
+                                <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a asp-action="Register" asp-controller="Account">Регистриране</a></li>
+                                    <li><a asp-action="Login" asp-controller="Account">Вписване</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="Profile" asp-controller="Account">Акаунт</a></li>
+                                    <li><a asp-action="Logout" asp-controller="Account">Изход</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-<form method="post">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="project-info-box mt-0">
+                        <h5 style="color: black;">ОПИСАНИЕ</h5>
+                        <p class="mb-0">@Model.Description</p>
+                    </div><!-- / project-info-box -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="project-info-box mt-0">
-                <h5>ДЕТАЙЛИ</h5>
-                <p class="mb-0">@Model.Description</p>
-            </div><!-- / project-info-box -->
-
-                <div class="project-info-box">
-                    <p><b>Име:</b> @Model.User.FirstName @Model.User.LastName</p>
-                    <p><b>Дата на раждане:</b> @Model.User.BirthDate</p>
-                    <p><b>Имейл:</b> @Model.User.Email</p>
-                    <p><b>Телефонен номер:</b> @Model.User.PhoneNumber</p>
-                </div>
-            <div class="project-info-box">
-                <p><b>Categories:</b> Design, Illustration</p>
-                <p><b>Skills:</b> Illustrator</p>
-            </div><!-- / project-info-box -->
+                    <div class="project-info-box">
+                        <p><b style="color: black">Име:</b> @Model.User.FirstName @Model.User.LastName</p>
+                        <p><b style="color: black">Дата на раждане:</b> @Model.User.BirthDate</p>
+                        <p><b style="color: black">Имейл:</b> @Model.User.Email</p>
+                        <p><b style="color: black">Телефонен номер:</b> @Model.User.PhoneNumber</p>
+                    </div>
 
 
-        </div><!-- / column -->
+                </div><!-- / column -->
 
-        <div class="col-md-6">
-            <img src="@Model.Image" />
-        </div><!-- / column -->
-    </div>
-</div>
-</form>
+                <div class="col-md-6">
+                    <img height="200px" src="@Model.Image" />
+                </div><!-- / column -->
+            </div>
+        </div>
+    </form>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.scrollex.min.js"></script>
+    <script src="~/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~/assets/js/browser.min.js"></script>
+    <script src="~/assets/js/breakpoints.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
+
 
 <style>
     body{

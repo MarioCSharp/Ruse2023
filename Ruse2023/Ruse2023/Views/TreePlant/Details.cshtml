@@ -15,459 +15,505 @@
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<script src="~/assets/js/jquery.min.js"></script>
-<script src="~/assets/js/jquery.scrollex.min.js"></script>
-<script src="~/assets/js/jquery.scrolly.min.js"></script>
-<script src="~/assets/js/browser.min.js"></script>
-<script src="~/assets/js/breakpoints.min.js"></script>
-<script src="~/assets/js/util.js"></script>
-<script src="~/assets/js/main.js"></script>
+<body style="background-color:#495057">
+    <br />
+    <br />
+    <h1><b style="position: absolute; left: 40%; font-size: 40px;">Детайли за дърво</b></h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <form method="post">
+        <header id="header" class="alt">
+            <h1><a href="index.html">EcoWay</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                        <div id="menu">
+                            <ul>
+                                <li><a asp-action="Index" asp-controller="Home">Начало</a></li>
+                                <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a asp-action="Register" asp-controller="Account">Регистриране</a></li>
+                                    <li><a asp-action="Login" asp-controller="Account">Вписване</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="Profile" asp-controller="Account">Акаунт</a></li>
+                                    <li><a asp-action="Logout" asp-controller="Account">Изход</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-<form method="post">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="project-info-box mt-0">
+                        <h5 style="color: black;">ОПИСАНИЕ</h5>
+                        <p class="mb-0">@Model.Description</p>
+                    </div><!-- / project-info-box -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="project-info-box mt-0">
-                <h5>ДЕТАЙЛИ</h5>
-                <p class="mb-0">@Model.Description</p>
-            </div><!-- / project-info-box -->
+                    <div class="project-info-box">
+                        <p><b style="color: black">Име:</b> @Model.User.FirstName @Model.User.LastName</p>
+                        <p><b style="color: black">Дата на раждане:</b> @Model.User.BirthDate</p>
+                        <p><b style="color: black">Имейл:</b> @Model.User.Email</p>
+                        <p><b style="color: black">Телефонен номер:</b> @Model.User.PhoneNumber</p>
+                    </div>
 
-                <div class="project-info-box">
-                    <p><b>Име:</b> @Model.User.FirstName @Model.User.LastName</p>
-                    <p><b>Дата на раждане:</b> @Model.User.BirthDate</p>
-                    <p><b>Имейл:</b> @Model.User.Email</p>
-                    <p><b>Телефонен номер:</b> @Model.User.PhoneNumber</p>
-                </div>
-            <div class="project-info-box">
-                <p><b>Categories:</b> Design, Illustration</p>
-                <p><b>Skills:</b> Illustrator</p>
-            </div><!-- / project-info-box -->
+                    <div class="project-info-box">
+                        <input type="number" asp-for="Credits" />
+                        <input type="hidden" asp-for="UserId" />
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                        <a asp-action="Decline" asp-controller="TreePlant" asp-route-id="@Model.Id" class="btn btn-warning">Decline</a>
+                    </div>
+                </div><!-- / column -->
 
-            <div class="project-info-box">
-                <input type="number" asp-for="Credits"/>
-                <input type="hidden" asp-for="UserId"/>
-                <button type="submit" class="btn btn-primary">Apply</button>
-                <a asp-action="Decline" asp-controller="TreePlant" asp-route-id="@Model.Id" class="btn btn-warning">Decline</a>
+                <div class="col-md-6">
+                    <img height="200px" src="@Model.Image" />
+                </div><!-- / column -->
             </div>
+        </div>
+    </form>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.scrollex.min.js"></script>
+    <script src="~/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~/assets/js/browser.min.js"></script>
+    <script src="~/assets/js/breakpoints.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
 
-
-        </div><!-- / column -->
-
-        <div class="col-md-6">
-            <img src="@Model.Image" />
-        </div><!-- / column -->
-    </div>
-</div>
-</form>
 
 <style>
-    body{
-    background:#f5f5f5;
-    margin-top:20px;}
-/*------- portfolio -------*/
-.project {
-  margin: 15px 0;
-}
+    body {
+        background: #f5f5f5;
+        margin-top: 20px;
+    }
+    /*------- portfolio -------*/
+    .project {
+        margin: 15px 0;
+    }
 
-.no-gutter .project {
-  margin: 0 !important;
-  padding: 0 !important;
-}
+    .no-gutter .project {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-.has-spacer {
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 30px;
-}
+    .has-spacer {
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
 
-.has-spacer-extra-space {
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 30px;
-}
+    .has-spacer-extra-space {
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
 
-.has-side-spacer {
-  margin-left: 30px;
-  margin-right: 30px;
-}
+    .has-side-spacer {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
 
-.project-title {
-  font-size: 1.25rem;
-}
+    .project-title {
+        font-size: 1.25rem;
+    }
 
-.project-skill {
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 0.06rem;
-}
+    .project-skill {
+        font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 0.06rem;
+    }
 
-.project-info-box {
-  margin: 15px 0;
-  background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 5px;
-}
+    .project-info-box {
+        margin: 15px 0;
+        background-color: #fff;
+        padding: 30px 40px;
+        border-radius: 5px;
+    }
 
-.project-info-box p {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #d5dadb;
-}
+        .project-info-box p {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #d5dadb;
+        }
 
-.project-info-box p:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    -webkit-backface-visibility: hidden;
-}
-.rounded {
-    border-radius: 5px !important;
-}
-.btn-xs.btn-icon {
-    width: 34px;
-    height: 34px;
-    max-width: 34px !important;
-    max-height: 34px !important;
-    font-size: 10px;
-    line-height: 34px;
-}
-/* facebook button */
-.btn-facebook, .btn-facebook:active, .btn-facebook:focus {
-  color: #fff !important;
-  background: #4e68a1;
-  border: 2px solid #4e68a1;
-}
+            .project-info-box p:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
 
-.btn-facebook:hover {
-  color: #fff !important;
-  background: #3b4f7a;
-  border: 2px solid #3b4f7a;
-}
+    img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        -webkit-backface-visibility: hidden;
+    }
 
-.btn-facebook-link, .btn-facebook-link:active, .btn-facebook-link:focus {
-  color: #4e68a1 !important;
-  background: transparent;
-  border: none;
-}
+    .rounded {
+        border-radius: 5px !important;
+    }
 
-.btn-facebook-link:hover {
-  color: #3b4f7a !important;
-}
+    .btn-xs.btn-icon {
+        width: 34px;
+        height: 34px;
+        max-width: 34px !important;
+        max-height: 34px !important;
+        font-size: 10px;
+        line-height: 34px;
+    }
+    /* facebook button */
+    .btn-facebook, .btn-facebook:active, .btn-facebook:focus {
+        color: #fff !important;
+        background: #4e68a1;
+        border: 2px solid #4e68a1;
+    }
 
-.btn-outline-facebook, .btn-outline-facebook:active, .btn-outline-facebook:focus {
-  color: #4e68a1 !important;
-  background: transparent;
-  border: 2px solid #4e68a1;
-}
+        .btn-facebook:hover {
+            color: #fff !important;
+            background: #3b4f7a;
+            border: 2px solid #3b4f7a;
+        }
 
-.btn-outline-facebook:hover {
-  color: #fff !important;
-  background: #4e68a1;
-  border: 2px solid #4e68a1;
-}
+    .btn-facebook-link, .btn-facebook-link:active, .btn-facebook-link:focus {
+        color: #4e68a1 !important;
+        background: transparent;
+        border: none;
+    }
 
-/* twitter button */
-.btn-twitter, .btn-twitter:active, .btn-twitter:focus {
-  color: #fff !important;
-  background: #65b5f2;
-  border: 2px solid #65b5f2;
-}
+        .btn-facebook-link:hover {
+            color: #3b4f7a !important;
+        }
 
-.btn-twitter:hover {
-  color: #fff !important;
-  background: #5294c6;
-  border: 2px solid #5294c6;
-}
+    .btn-outline-facebook, .btn-outline-facebook:active, .btn-outline-facebook:focus {
+        color: #4e68a1 !important;
+        background: transparent;
+        border: 2px solid #4e68a1;
+    }
 
-.btn-twitter:hover {
-  color: #fff !important;
-  background: #5294c6;
-  border: 2px solid #5294c6;
-}
+        .btn-outline-facebook:hover {
+            color: #fff !important;
+            background: #4e68a1;
+            border: 2px solid #4e68a1;
+        }
 
-.btn-twitter-link, .btn-twitter-link:active, .btn-twitter-link:focus {
-  color: #65b5f2 !important;
-  background: transparent;
-  border: none;
-}
+    /* twitter button */
+    .btn-twitter, .btn-twitter:active, .btn-twitter:focus {
+        color: #fff !important;
+        background: #65b5f2;
+        border: 2px solid #65b5f2;
+    }
 
-.btn-twitter-link:hover {
-  color: #5294c6 !important;
-}
+        .btn-twitter:hover {
+            color: #fff !important;
+            background: #5294c6;
+            border: 2px solid #5294c6;
+        }
 
-.btn-outline-twitter, .btn-outline-twitter:active, .btn-outline-twitter:focus {
-  color: #65b5f2 !important;
-  background: transparent;
-  border: 2px solid #65b5f2;
-}
+        .btn-twitter:hover {
+            color: #fff !important;
+            background: #5294c6;
+            border: 2px solid #5294c6;
+        }
 
-.btn-outline-twitter:hover {
-  color: #fff !important;
-  background: #65b5f2;
-  border: 2px solid #65b5f2;
-}
+    .btn-twitter-link, .btn-twitter-link:active, .btn-twitter-link:focus {
+        color: #65b5f2 !important;
+        background: transparent;
+        border: none;
+    }
 
-/* google button */
-.btn-google, .btn-google:active, .btn-google:focus {
-  color: #fff !important;
-  background: #e05d4b;
-  border: 2px solid #e05d4b;
-}
+        .btn-twitter-link:hover {
+            color: #5294c6 !important;
+        }
 
-.btn-google:hover {
-  color: #fff !important;
-  background: #b94c3d;
-  border: 2px solid #b94c3d;
-}
+    .btn-outline-twitter, .btn-outline-twitter:active, .btn-outline-twitter:focus {
+        color: #65b5f2 !important;
+        background: transparent;
+        border: 2px solid #65b5f2;
+    }
 
-.btn-google-link, .btn-google-link:active, .btn-google-link:focus {
-  color: #e05d4b !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-twitter:hover {
+            color: #fff !important;
+            background: #65b5f2;
+            border: 2px solid #65b5f2;
+        }
 
-.btn-google-link:hover {
-  color: #b94c3d !important;
-}
+    /* google button */
+    .btn-google, .btn-google:active, .btn-google:focus {
+        color: #fff !important;
+        background: #e05d4b;
+        border: 2px solid #e05d4b;
+    }
 
-.btn-outline-google, .btn-outline-google:active, .btn-outline-google:focus {
-  color: #e05d4b !important;
-  background: transparent;
-  border: 2px solid #e05d4b;
-}
+        .btn-google:hover {
+            color: #fff !important;
+            background: #b94c3d;
+            border: 2px solid #b94c3d;
+        }
 
-.btn-outline-google:hover {
-  color: #fff !important;
-  background: #e05d4b;
-  border: 2px solid #e05d4b;
-}
+    .btn-google-link, .btn-google-link:active, .btn-google-link:focus {
+        color: #e05d4b !important;
+        background: transparent;
+        border: none;
+    }
 
-/* linkedin button */
-.btn-linkedin, .btn-linkedin:active, .btn-linkedin:focus {
-  color: #fff !important;
-  background: #2083bc;
-  border: 2px solid #2083bc;
-}
+        .btn-google-link:hover {
+            color: #b94c3d !important;
+        }
 
-.btn-linkedin:hover {
-  color: #fff !important;
-  background: #186592;
-  border: 2px solid #186592;
-}
+    .btn-outline-google, .btn-outline-google:active, .btn-outline-google:focus {
+        color: #e05d4b !important;
+        background: transparent;
+        border: 2px solid #e05d4b;
+    }
 
-.btn-linkedin-link, .btn-linkedin-link:active, .btn-linkedin-link:focus {
-  color: #2083bc !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-google:hover {
+            color: #fff !important;
+            background: #e05d4b;
+            border: 2px solid #e05d4b;
+        }
 
-.btn-linkedin-link:hover {
-  color: #186592 !important;
-}
+    /* linkedin button */
+    .btn-linkedin, .btn-linkedin:active, .btn-linkedin:focus {
+        color: #fff !important;
+        background: #2083bc;
+        border: 2px solid #2083bc;
+    }
 
-.btn-outline-linkedin, .btn-outline-linkedin:active, .btn-outline-linkedin:focus {
-  color: #2083bc !important;
-  background: transparent;
-  border: 2px solid #2083bc;
-}
+        .btn-linkedin:hover {
+            color: #fff !important;
+            background: #186592;
+            border: 2px solid #186592;
+        }
 
-.btn-outline-linkedin:hover {
-  color: #fff !important;
-  background: #2083bc;
-  border: 2px solid #2083bc;
-}
+    .btn-linkedin-link, .btn-linkedin-link:active, .btn-linkedin-link:focus {
+        color: #2083bc !important;
+        background: transparent;
+        border: none;
+    }
 
-/* pinterest button */
-.btn-pinterest, .btn-pinterest:active, .btn-pinterest:focus {
-  color: #fff !important;
-  background: #d2373b;
-  border: 2px solid #d2373b;
-}
+        .btn-linkedin-link:hover {
+            color: #186592 !important;
+        }
 
-.btn-pinterest:hover {
-  color: #fff !important;
-  background: #ad2c2f;
-  border: 2px solid #ad2c2f;
-}
+    .btn-outline-linkedin, .btn-outline-linkedin:active, .btn-outline-linkedin:focus {
+        color: #2083bc !important;
+        background: transparent;
+        border: 2px solid #2083bc;
+    }
 
-.btn-pinterest-link, .btn-pinterest-link:active, .btn-pinterest-link:focus {
-  color: #d2373b !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-linkedin:hover {
+            color: #fff !important;
+            background: #2083bc;
+            border: 2px solid #2083bc;
+        }
 
-.btn-pinterest-link:hover {
-  color: #ad2c2f !important;
-}
+    /* pinterest button */
+    .btn-pinterest, .btn-pinterest:active, .btn-pinterest:focus {
+        color: #fff !important;
+        background: #d2373b;
+        border: 2px solid #d2373b;
+    }
 
-.btn-outline-pinterest, .btn-outline-pinterest:active, .btn-outline-pinterest:focus {
-  color: #d2373b !important;
-  background: transparent;
-  border: 2px solid #d2373b;
-}
+        .btn-pinterest:hover {
+            color: #fff !important;
+            background: #ad2c2f;
+            border: 2px solid #ad2c2f;
+        }
 
-.btn-outline-pinterest:hover {
-  color: #fff !important;
-  background: #d2373b;
-  border: 2px solid #d2373b;
-}
+    .btn-pinterest-link, .btn-pinterest-link:active, .btn-pinterest-link:focus {
+        color: #d2373b !important;
+        background: transparent;
+        border: none;
+    }
 
-/* dribble button */
-.btn-dribbble, .btn-dribbble:active, .btn-dribbble:focus {
-  color: #fff !important;
-  background: #ec5f94;
-  border: 2px solid #ec5f94;
-}
+        .btn-pinterest-link:hover {
+            color: #ad2c2f !important;
+        }
 
-.btn-dribbble:hover {
-  color: #fff !important;
-  background: #b4446e;
-  border: 2px solid #b4446e;
-}
+    .btn-outline-pinterest, .btn-outline-pinterest:active, .btn-outline-pinterest:focus {
+        color: #d2373b !important;
+        background: transparent;
+        border: 2px solid #d2373b;
+    }
 
-.btn-dribbble-link, .btn-dribbble-link:active, .btn-dribbble-link:focus {
-  color: #ec5f94 !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-pinterest:hover {
+            color: #fff !important;
+            background: #d2373b;
+            border: 2px solid #d2373b;
+        }
 
-.btn-dribbble-link:hover {
-  color: #b4446e !important;
-}
+    /* dribble button */
+    .btn-dribbble, .btn-dribbble:active, .btn-dribbble:focus {
+        color: #fff !important;
+        background: #ec5f94;
+        border: 2px solid #ec5f94;
+    }
 
-.btn-outline-dribbble, .btn-outline-dribbble:active, .btn-outline-dribbble:focus {
-  color: #ec5f94 !important;
-  background: transparent;
-  border: 2px solid #ec5f94;
-}
+        .btn-dribbble:hover {
+            color: #fff !important;
+            background: #b4446e;
+            border: 2px solid #b4446e;
+        }
 
-.btn-outline-dribbble:hover {
-  color: #fff !important;
-  background: #ec5f94;
-  border: 2px solid #ec5f94;
-}
+    .btn-dribbble-link, .btn-dribbble-link:active, .btn-dribbble-link:focus {
+        color: #ec5f94 !important;
+        background: transparent;
+        border: none;
+    }
 
-/* instagram button */
-.btn-instagram, .btn-instagram:active, .btn-instagram:focus {
-  color: #fff !important;
-  background: #4c5fd7;
-  border: 2px solid #4c5fd7;
-}
+        .btn-dribbble-link:hover {
+            color: #b4446e !important;
+        }
 
-.btn-instagram:hover {
-  color: #fff !important;
-  background: #4252ba;
-  border: 2px solid #4252ba;
-}
+    .btn-outline-dribbble, .btn-outline-dribbble:active, .btn-outline-dribbble:focus {
+        color: #ec5f94 !important;
+        background: transparent;
+        border: 2px solid #ec5f94;
+    }
 
-.btn-instagram-link, .btn-instagram-link:active, .btn-instagram-link:focus {
-  color: #4c5fd7 !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-dribbble:hover {
+            color: #fff !important;
+            background: #ec5f94;
+            border: 2px solid #ec5f94;
+        }
 
-.btn-instagram-link:hover {
-  color: #4252ba !important;
-}
+    /* instagram button */
+    .btn-instagram, .btn-instagram:active, .btn-instagram:focus {
+        color: #fff !important;
+        background: #4c5fd7;
+        border: 2px solid #4c5fd7;
+    }
 
-.btn-outline-instagram, .btn-outline-instagram:active, .btn-outline-instagram:focus {
-  color: #4c5fd7 !important;
-  background: transparent;
-  border: 2px solid #4c5fd7;
-}
+        .btn-instagram:hover {
+            color: #fff !important;
+            background: #4252ba;
+            border: 2px solid #4252ba;
+        }
 
-.btn-outline-instagram:hover {
-  color: #fff !important;
-  background: #4c5fd7;
-  border: 2px solid #4c5fd7;
-}
+    .btn-instagram-link, .btn-instagram-link:active, .btn-instagram-link:focus {
+        color: #4c5fd7 !important;
+        background: transparent;
+        border: none;
+    }
 
-/* youtube button */
-.btn-youtube, .btn-youtube:active, .btn-youtube:focus {
-  color: #fff !important;
-  background: #e52d27;
-  border: 2px solid #e52d27;
-}
+        .btn-instagram-link:hover {
+            color: #4252ba !important;
+        }
 
-.btn-youtube:hover {
-  color: #fff !important;
-  background: #b31217;
-  border: 2px solid #b31217;
-}
+    .btn-outline-instagram, .btn-outline-instagram:active, .btn-outline-instagram:focus {
+        color: #4c5fd7 !important;
+        background: transparent;
+        border: 2px solid #4c5fd7;
+    }
 
-.btn-youtube-link, .btn-youtube-link:active, .btn-youtube-link:focus {
-  color: #e52d27 !important;
-  background: transparent;
-  border: none;
-}
+        .btn-outline-instagram:hover {
+            color: #fff !important;
+            background: #4c5fd7;
+            border: 2px solid #4c5fd7;
+        }
 
-.btn-youtube-link:hover {
-  color: #b31217 !important;
-}
+    /* youtube button */
+    .btn-youtube, .btn-youtube:active, .btn-youtube:focus {
+        color: #fff !important;
+        background: #e52d27;
+        border: 2px solid #e52d27;
+    }
 
-.btn-outline-youtube, .btn-outline-youtube:active, .btn-outline-youtube:focus {
-  color: #e52d27 !important;
-  background: transparent;
-  border: 2px solid #e52d27;
-}
+        .btn-youtube:hover {
+            color: #fff !important;
+            background: #b31217;
+            border: 2px solid #b31217;
+        }
 
-.btn-outline-youtube:hover {
-  color: #fff !important;
-  background: #e52d27;
-  border: 2px solid #e52d27;
-}
-.btn-xs.btn-icon span, .btn-xs.btn-icon i {
-    line-height: 34px;
-}
-.btn-icon.btn-circle span, .btn-icon.btn-circle i {
-    margin-top: -1px;
-    margin-right: -1px;
-}
-.btn-icon i {
-    margin-top: -1px;
-}
-.btn-icon span, .btn-icon i {
-    display: block;
-    line-height: 50px;
-}
-a.btn, a.btn-social {
-    display: inline-block;
-}
-.mr-5 {
-    margin-right: 5px !important;
-}
-.mb-0 {
-    margin-bottom: 0 !important;
-}
-.btn-facebook, .btn-facebook:active, .btn-facebook:focus {
-    color: #fff !important;
-    background: #4e68a1;
-    border: 2px solid #4e68a1;
-}
-.btn-circle {
-    border-radius: 50% !important;
-}
-.project-info-box p {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #d5dadb;
-}
-p {
-    font-family: "Barlow", sans-serif !important;
-    font-weight: 300;
-    font-size: 1rem;
-    color: #686c6d;
-    letter-spacing: 0.03rem;
-    margin-bottom: 10px;
-}
-b, strong {
-    font-weight: 700 !important;
-}
+    .btn-youtube-link, .btn-youtube-link:active, .btn-youtube-link:focus {
+        color: #e52d27 !important;
+        background: transparent;
+        border: none;
+    }
+
+        .btn-youtube-link:hover {
+            color: #b31217 !important;
+        }
+
+    .btn-outline-youtube, .btn-outline-youtube:active, .btn-outline-youtube:focus {
+        color: #e52d27 !important;
+        background: transparent;
+        border: 2px solid #e52d27;
+    }
+
+        .btn-outline-youtube:hover {
+            color: #fff !important;
+            background: #e52d27;
+            border: 2px solid #e52d27;
+        }
+
+    .btn-xs.btn-icon span, .btn-xs.btn-icon i {
+        line-height: 34px;
+    }
+
+    .btn-icon.btn-circle span, .btn-icon.btn-circle i {
+        margin-top: -1px;
+        margin-right: -1px;
+    }
+
+    .btn-icon i {
+        margin-top: -1px;
+    }
+
+    .btn-icon span, .btn-icon i {
+        display: block;
+        line-height: 50px;
+    }
+
+    a.btn, a.btn-social {
+        display: inline-block;
+    }
+
+    .mr-5 {
+        margin-right: 5px !important;
+    }
+
+    .mb-0 {
+        margin-bottom: 0 !important;
+    }
+
+    .btn-facebook, .btn-facebook:active, .btn-facebook:focus {
+        color: #fff !important;
+        background: #4e68a1;
+        border: 2px solid #4e68a1;
+    }
+
+    .btn-circle {
+        border-radius: 50% !important;
+    }
+
+    .project-info-box p {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #d5dadb;
+    }
+
+    p {
+        font-family: "Barlow", sans-serif !important;
+        font-weight: 300;
+        font-size: 1rem;
+        color: #686c6d;
+        letter-spacing: 0.03rem;
+        margin-bottom: 10px;
+    }
+
+    b, strong {
+        font-weight: 700 !important;
+    }
 </style>
