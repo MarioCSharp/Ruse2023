@@ -58,8 +58,8 @@
                                 <form method="post" id="contact-form" enctype="multipart/form-data">
                                     <div class="row clearfix">
                                         <div class="form-group col-md-6 col-sm-6 co-xs-12">
-                                            <label style="color: black" asp-for="Image"></label>
-                                            <input type="file" id="files" asp-for="Image" class="form-control" />
+                                            <label asp-for="@Model.Image" class="form-label">Image</label>
+                                            <input asp-for="@Model.Image" class="form-control" type="file" id="formFileMultiple" multiple />
                                             <span asp-validation-for="Image" class="text-danger"></span>
                                         </div>
                                         <div class="form-group col-md-12 col-sm-12 co-xs-12">

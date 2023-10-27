@@ -2,212 +2,171 @@
 	Layout = "";
 }@using Ruse2023.Models.Shopping;
 @model ShoppingApplicationModel
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-	<title>Booking Form HTML Template</title>
-
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-
-	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-
-	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
+    <meta charset="UTF-8">
+    <title>CodePen - Contact Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/treeplantCss.css">
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <link rel="stylesheet" href="css/treeplant.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<body>
-	<div id="booking" class="section">
-		<div class="section-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-7 col-md-push-5">
-						<div class="booking-cta">
-							<h1>Make your reservation</h1>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam consectetur molestias itaque
-								ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates aliquid consequuntur cumque quasi.
-								Perspiciatis.
-							</p>
-						</div>
-					</div>
-					<div class="col-md-4 col-md-pull-7">
-						<div class="booking-form">
-							<form id="account" method="post" enctype="multipart/form-data">
-								<div class="form-group">
-                                    <label asp-for="Description"></label>
-                                    <input asp-for="Description" class="form-control" />
-                                    <span asp-validation-for="Description" class="text-danger"></span>
-								</div>
-                                <div class="form-group">
-									<label asp-for="Image"></label>
-    								<input type="file" id="files" asp-for="Image" class="form-control" />
-    								<span asp-validation-for="Image" class="text-danger"></span>
-								</div>
-								<div class="form-btn">
-									<button type="submit" class="submit-btn">Apply</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+<body class="landing is-preload">
+    <header id="header" class="alt">
+        <div id="page-wrapper">
+            <h1><a href="index.html">EcoWay</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                        <div id="menu">
+                            <ul>
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a asp-action="Register" asp-controller="Account">Sign Up</a></li>
+                                    <li><a asp-action="Login" asp-controller="Account">Log In</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="Profile" asp-controller="Account">Account</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-</html>
+    </header>
+
+    <section class="contact-page-section">
+        <div class="container">
+            <div class="sec-title">
+                <div class="title">Contact Us</div>
+                <h2 style="color: lightgrey">Let's Get in Touch.</h2>
+            </div>
+            <div class="inner-container">
+                <div class="row clearfix">
+                    <div class="form-column col-md-8 col-sm-12 col-xs-12">
+                        <div class="inner-column">
+                            <div class="contact-form">
+                                <form method="post" id="contact-form" enctype="multipart/form-data">
+                                    <div class="row clearfix">
+                                        <div class="form-group col-md-6 col-sm-6 co-xs-12">
+                                            <label asp-for="@Model.Image" class="form-label">Image</label>
+                                            <input asp-for="@Model.Image" class="form-control" type="file" id="formFileMultiple" multiple />
+                                            <span asp-validation-for="Image" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 co-xs-12">
+                                            <label style="color: black" asp-for="Description"></label>
+                                            <textarea asp-for="Description" placeholder="Description"></textarea>
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 co-xs-12">
+                                            <button type="submit" class="theme-btn btn-style-one">Send Now</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column col-md-4 col-sm-12 col-xs-12">
+                        <div class="inner-column">
+                            <h2>Contact Info</h2>
+                            <ul class="list-info">
+                                <li><i class="fas fa-globe"></i>123 lorem ispum Abc, Street Chandigarh.</li>
+                                <li><i class="far fa-envelope"></i>example@test</li>
+                                <li><i class="fas fa-phone"></i>1-234-567-890 <br> 1-234-567-890</li>
+                            </ul>
+                            <ul class="social-icon-four">
+                                <li class="follow">Follow on: </li>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='https://code.jquery.com/jquery-2.1.0.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.scrollex.min.js"></script>
+    <script src="~/assets/js/jquery.scrolly.min.js"></script>
+    <script src="~/assets/js/browser.min.js"></script>
+    <script src="~/assets/js/breakpoints.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
 
 <style>
-    .section {
-	position: relative;
-	height: 100vh;
-}
+    #id {
+        text-align: center;
+    }
 
-.section .section-center {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
+    html {
+        scroll-behavior: smooth;
+    }
 
-#booking {
-	font-family: 'Montserrat', sans-serif;
-	background-image: url('../img/background.jpg');
-	background-size: cover;
-	background-position: center;
-}
+    .products {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 92%;
+    }
 
-#booking::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-}
+    #image {
+        width: 50px;
+        height: 90px;
+    }
 
-.booking-form {
-	background-color: #fff;
-	padding: 50px 20px;
-	-webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-	box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-	border-radius: 4px;
-}
+    #butona {
+        width: 60%;
+        height: 40px;
+        font-size: 20px;
+        display: flex; /* this enables the flexbox model */
+        align-items: center; /* this vertically aligns the text in the middle */
+        justify-content: center;
+    }
 
-.booking-form .form-group {
-	position: relative;
-	margin-bottom: 30px;
-}
+    #form {
+        border: 2px solid;
+        border-radius: 25px;
+        padding: 20px;
+    }
 
-.booking-form .form-control {
-	background-color: #ebecee;
-	border-radius: 4px;
-	border: none;
-	height: 40px;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	color: #3e485c;
-	font-size: 14px;
-}
+    /* klient*/
+    .klient {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width: 92%;
+    }
 
-.booking-form .form-control::-webkit-input-placeholder {
-	color: rgba(62, 72, 92, 0.3);
-}
+    #logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+    }
 
-.booking-form .form-control:-ms-input-placeholder {
-	color: rgba(62, 72, 92, 0.3);
-}
+    #snimkanaklient {
+        width: 50px;
+        height: 50px;
+    }
 
-.booking-form .form-control::placeholder {
-	color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form input[type="date"].form-control:invalid {
-	color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form select.form-control {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-.booking-form select.form-control+.select-arrow {
-	position: absolute;
-	right: 0px;
-	bottom: 4px;
-	width: 32px;
-	line-height: 32px;
-	height: 32px;
-	text-align: center;
-	pointer-events: none;
-	color: rgba(62, 72, 92, 0.3);
-	font-size: 14px;
-}
-
-.booking-form select.form-control+.select-arrow:after {
-	content: '\279C';
-	display: block;
-	-webkit-transform: rotate(90deg);
-	transform: rotate(90deg);
-}
-
-.booking-form .form-label {
-	display: inline-block;
-	color: #3e485c;
-	font-weight: 700;
-	margin-bottom: 6px;
-	margin-left: 7px;
-}
-
-.booking-form .submit-btn {
-	display: inline-block;
-	color: #fff;
-	background-color: green;
-	font-weight: 700;
-	padding: 14px 30px;
-	border-radius: 4px;
-	border: none;
-	-webkit-transition: 0.2s all;
-	transition: 0.2s all;
-}
-
-.booking-form .submit-btn:hover,
-.booking-form .submit-btn:focus {
-	opacity: 0.9;
-}
-
-.booking-cta {
-	margin-top: 80px;
-	margin-bottom: 30px;
-}
-
-.booking-cta h1 {
-	font-size: 52px;
-	text-transform: uppercase;
-	color: black;
-	font-weight: 700;
-}
-
-.booking-cta p {
-	font-size: 16px;
-	color: black;
-}
+    * {
+        margin: 0;
+        padding: 0;
+    }
 </style>

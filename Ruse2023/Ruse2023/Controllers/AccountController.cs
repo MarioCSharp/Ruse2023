@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
 using Ruse2023.Models.Account;
+using Ruse2023.Services.AccountService;
 
 namespace Ruse2023.Controllers
 {
@@ -11,13 +13,16 @@ namespace Ruse2023.Controllers
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
         private readonly ApplicationDbContext context;
+        private readonly IAccountService accountService;
         public AccountController(UserManager<User> userManager,
                                  SignInManager<User> signInManager,
-                                 ApplicationDbContext context)
+                                 ApplicationDbContext context,
+                                 IAccountService accountService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+            this.accountService = accountService;
         }
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -110,9 +115,19 @@ namespace Ruse2023.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult Manage()
+        [Authorize]
+        public async Task<IActionResult> Profile() // No time to put it in a service :(
         {
-            return View();
+            var model = await context.Users.FindAsync(accountService.GetUserId());
+
+            return View(new UserDisplayModel()
+            {
+                BirthDate = model.BirthDate,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber
+            });
         }
     }
 }

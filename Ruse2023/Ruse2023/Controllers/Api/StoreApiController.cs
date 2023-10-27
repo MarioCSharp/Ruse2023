@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ruse2023.Data;
 using Ruse2023.Data.Models;
+using Ruse2023.Models;
 using Ruse2023.Models.Store;
 using Ruse2023.Services.AccountService;
 
@@ -49,6 +50,18 @@ namespace Ruse2023.Controllers.Api
             }
 
             return new StoreIntModel() { Ammount = credits.Ammount };
+        }
+        [HttpGet]
+        [Route("api/getApplicationsStats")]
+        public async Task<ApplicationStatisticsModel> GetAppStats()
+        {
+            return new ApplicationStatisticsModel
+            {
+                Users = await context.Users.CountAsync(),
+                CreditsRewarded = await context.Credits.SumAsync(x => x.Ammount) + await context.BoughtProducts.SumAsync(x => x.Product.Price),
+                PlantedTrees = await context.TreePlantApplications.Where(x => x.Status == "Approved").CountAsync(),
+                EcoShopping = await context.ShoppingApplications.Where(x => x.Status == "Approved").CountAsync(),
+            };
         }
     }
 }
