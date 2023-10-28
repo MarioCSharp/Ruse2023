@@ -24,16 +24,16 @@
                         <a href="#menu" class="menuToggle"><span>Menu</span></a>
                         <div id="menu">
                             <ul>
-                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-controller="Home" asp-action="Index">Начало</a></li>
                                 <li><a asp-action="Index" asp-controller="Store">Магазин</a></li>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
-                                    <li><a asp-action="Register" asp-controller="Account">Sign Up</a></li>
-                                    <li><a asp-action="Login" asp-controller="Account">Log In</a></li>
+                                    <li><a asp-action="Register" asp-controller="Account">Регистриране</a></li>
+                                    <li><a asp-action="Login" asp-controller="Account">Вписване</a></li>
                                 }
                                 else
                                 {
-                                    <li><a asp-action="Profile" asp-controller="Account">Account</a></li>
+                                    <li><a asp-action="Profile" asp-controller="Account">Акаунт</a></li>
                                 }
                             </ul>
                         </div>
@@ -77,19 +77,15 @@
                     </div>
                     <div class="info-column col-md-4 col-sm-12 col-xs-12">
                         <div class="inner-column">
-                            <h2>Contact Info</h2>
+                            <h2>Информация</h2>
                             <ul class="list-info">
-                                <li><i class="fas fa-globe"></i>123 lorem ispum Abc, Street Chandigarh.</li>
-                                <li><i class="far fa-envelope"></i>example@test</li>
-                                <li><i class="fas fa-phone"></i>1-234-567-890 <br> 1-234-567-890</li>
+                                <li><i class="fas fa-globe"></i>Бъдете сигурни, че снимката е хубава.</li>
+                                <li><i class="far fa-envelope"></i>Ако има проблем свържете се с нас.</li>
+                                <li><i class="fas fa-phone"></i>+35988888888</li>
                             </ul>
                             <ul class="social-icon-four">
                                 <li class="follow">Follow on: </li>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                <li><a href="https://github.com/MarioCSharp/"><i class="fab fa-github"></i></a></li>
                             </ul>
                         </div>
                     </div>

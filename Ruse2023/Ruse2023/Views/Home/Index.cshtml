@@ -80,7 +80,7 @@
                 <ul class="icons major">
                     <li><span class="icon fa-map major style1"><span class="label">Lorem</span></span></li>
                     <li><span class="icon fa-heart major style2"><span class="label">Ipsum</span></span></li>
-                    <li><span class="icon solid fa-code major style3"><span class="label">Dolor</span></span></li>
+                    <li><span class="icon solid fa-shopping-cart major style3"><span class="label">Dolor</span></span></li>
                 </ul>
             </div>
         </section>
@@ -90,7 +90,7 @@
             <section class="spotlight">
             </section>
             <section class="spotlight">
-                <div class="image"><img src="images/pic02.jpg" alt="" /></div><div class="content">
+                <div class="image"><img src="~/images/kolichka.jpg" alt="" /></div><div class="content">
                     <h2>
                         <a asp-action="Create" asp-controller="Shopping" class="button fit primary">Екологично пазаруване</a>
                         <br />
@@ -129,33 +129,27 @@
                     </p>
                 </header>
                 <ul class="features">
-                    <li class="icon fa-paper-plane">
-                        <h3></h3>
-                        <p id="users">
-                            
+                    <li class="icon solid fa-user">
+                        <p style="font-weight: bold" id="users">
+                            @Model.Stats.Users потребителя  
                         </p>
                     </li>
-                    <li class="icon solid fa-laptop">
-                        <h3></h3>
-                        <p>
-
+                    <li class="icon solid fa-shopping-cart">
+                        <p style="font-weight: bold">
+                            @Model.Stats.EcoShopping еко покупки
                         </p>
                     </li>
-                    <li class="icon solid fa-code">
-                        <h3></h3>
-                        <p></p>
+                    <li class="icon solid fa-gift">
+                        <p style="font-weight: bold">@Model.Stats.CreditsRewarded общо спечелени точки</p>
                     </li>
-                    <li class="icon solid fa-headphones-alt">
-                        <h3></h3>
-                        <p></p>
+                    <li class="icon solid fa-globe">
+                        <p style="font-weight: bold">@Model.Stats.PlantedTrees засадени дръвчета</p>
                     </li>
                     <li class="icon fa-heart">
-                        <h3></h3>
-                        <p></p>
+                        <p style="font-weight: bold">7 официални спонсора</p>
                     </li>
-                    <li class="icon fa-flag">
-                        <h3></h3>
-                        <p> </p>
+                    <li class="icon fa-sun">
+                        <p style="font-weight: bold">Вече сме в 8 държави</p>
                     </li>
                 </ul>
             </div>
@@ -163,23 +157,29 @@
 
         <!-- CTA -->
         <section id="cta" class="wrapper style4">
+            <h1 style="display: flex; justify-content: center; align-items: center; font-size: 60px; font-weight: bold;">За нас</h1>
             <div class="inner">
-                <header>
-                    <h2></h2>
-                    <p></p>
-                </header>
-                <ul class="actions stacked">
-                    <li><a asp-action="Index" asp-controller="Store" class="button fit primary">Магазин</a></li>
-                    <li><a href="#" class="button fit">Засади дърво</a></li>
-                </ul>
+                    
+                    <p style="font-size: 20px;">
+                        EcoWay е онлайн платформа, насочена към промотирането 
+                        на еко осъзнатото поведение. Спонсориран от водещи екологични фондове, 
+                        ние съчетаваме усилията за опазване на 
+                        околната среда със социалната отговорност. 
+                        Ние възнаграждаваме нашите потребители, 
+                        които активно се ангажират с опазването на природата, 
+                        като засаждат дървета и придобиват екологично устойчиви продукти. 
+                        Със съвместни усилия търсим пътища за създаване на по-зелен и устойчив свят.
+
+                    </p>
             </div>
         </section>
 
         <!-- Footer -->
         <footer id="footer">
             <ul class="icons">
+                <h1 style="display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold;">Контакти</h1>
             </ul>
-            s
+            Тел +3598888888; Имейл ecoway@gmail.com
         </footer>
 
     </div>
@@ -192,6 +192,8 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+
+
 
 </body>
 </html>

@@ -74,13 +74,28 @@ namespace Ruse2023.Services.StoreService
 
         public async Task<List<ProductModel>> GetAllProducts()
         {
+            var credits = await context.Credits.FirstOrDefaultAsync(x => x.UserId == accountService.GetUserId());
+
+            if (credits == null)
+            {
+                var c = new Credits()
+                {
+                    UserId = accountService.GetUserId(),
+                    Ammount = 0
+                };
+
+                await context.Credits.AddAsync(c);
+                await context.SaveChangesAsync();
+            }
+
             return await context.Products
                 .Select(x => new ProductModel()
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(x.Image)),
-                    Price = x.Price
+                    Price = x.Price,
+                    Credits = credits.Ammount
                 }).ToListAsync();
         }
 

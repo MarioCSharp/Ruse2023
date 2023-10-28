@@ -1,5 +1,5 @@
 ﻿@using Ruse2023.Models.Store;
-@model List<ProductModel>
+@model StoreModel
 
 @{
     Layout = "";
@@ -53,7 +53,7 @@
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Магазин</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Добре дошли!</p>
+                <p class="lead fw-normal text-white-50 mb-0">Добре дошли! Вашите кредити: @Model.Credits</p>
             </div>
         </div>
     </header>
@@ -61,7 +61,7 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach (var product in Model)
+                @foreach (var product in Model.Products)
                 {
                     <div class="col mb-5">
                         <div class="card h-100">

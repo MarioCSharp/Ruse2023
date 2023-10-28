@@ -9,5 +9,6 @@ namespace Ruse2023.Models
         public List<StoreApiModel> Products { get; set; }
         public List<UserDisplayModel> Users { get; set; }
         public TreePlantApplicationModel TreePlant { get; set; }
+        public ApplicationStatisticsModel Stats { get; set; }
     }
 }

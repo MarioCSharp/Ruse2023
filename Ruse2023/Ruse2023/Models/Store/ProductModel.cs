@@ -11,5 +11,6 @@ namespace Ruse2023.Models.Store
         public int Price { get; set; }
         [Required]
         public string Image { get; set; }
+        public int Credits { get; set; }
     }
 }

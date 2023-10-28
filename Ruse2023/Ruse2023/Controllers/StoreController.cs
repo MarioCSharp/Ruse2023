@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Ruse2023.Data;
+using Ruse2023.Data.Models;
+using Ruse2023.Models;
 using Ruse2023.Models.Store;
 using Ruse2023.Services.AccountService;
 using Ruse2023.Services.StoreService;
@@ -10,15 +14,34 @@ namespace Ruse2023.Controllers
     {
         private readonly IStoreService storeService;
         private readonly IAccountService accountService;
+        private readonly ApplicationDbContext context;
         public StoreController(IStoreService storeService,
-                               IAccountService accountService)
+                               IAccountService accountService,
+                               ApplicationDbContext context)
         {
             this.storeService = storeService;
+            this.context = context;
             this.accountService = accountService;
         }
         public async Task<IActionResult> Index()
         {
-            return View(await storeService.GetAllProducts());
+            var credits = await context.Credits.FirstOrDefaultAsync(x => x.UserId == accountService.GetUserId());
+
+            if (credits == null)
+            {
+                var c = new Credits()
+                {
+                    UserId = accountService.GetUserId(),
+                    Ammount = 0
+                };
+
+                await context.Credits.AddAsync(c);
+                await context.SaveChangesAsync();
+            }
+
+            return View(new StoreModel(){
+                Products = await storeService.GetAllProducts(), Credits = context.Credits.FirstOrDefaultAsync(x => x.UserId == accountService.GetUserId()).Result.Ammount
+            });
         }
         [Authorize(Policy = "AdministratorModeratorPolicy")]
         public IActionResult AddProduct()
